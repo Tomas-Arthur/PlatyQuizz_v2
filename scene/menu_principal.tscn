@@ -1,0 +1,48 @@
+[gd_scene load_steps=3 format=3 uid="uid://bj2u3ih30waj"]
+
+[ext_resource type="Script" path="res://scripts/changementScene.cs" id="1_evd4b"]
+[ext_resource type="Texture2D" uid="uid://5wg8gpdrrkd" path="res://ressources/fond.png" id="1_pagq2"]
+
+[node name="Menu Principal" type="Node2D"]
+script = ExtResource("1_evd4b")
+
+[node name="CanvasGroup" type="CanvasGroup" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasGroup"]
+position = Vector2(584.5, 325)
+scale = Vector2(2.26078, 0.84183)
+texture = ExtResource("1_pagq2")
+
+[node name="PlayButton" type="Button" parent="CanvasGroup"]
+offset_left = 482.0
+offset_top = 230.0
+offset_right = 656.0
+offset_bottom = 314.0
+text = "Play"
+
+[node name="HostButton2" type="Button" parent="CanvasGroup"]
+offset_left = 489.0
+offset_top = 355.0
+offset_right = 656.0
+offset_bottom = 446.0
+text = "Host"
+
+[node name="ExitButton" type="Button" parent="CanvasGroup"]
+offset_left = 487.0
+offset_top = 500.0
+offset_right = 655.0
+offset_bottom = 591.0
+text = "Exit"
+
+[node name="Label" type="Label" parent="."]
+offset_left = 271.0
+offset_top = 10.0
+offset_right = 898.0
+offset_bottom = 175.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 118
+text = "Platy Quizz"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="CanvasGroup/PlayButton" to="." method="_on_play_button_pressed"]
