@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://8h5o11kac1yd"
+path="res://.godot/imported/GTO the Animation - Opening 1  Drivers High.mp3-e3dd9001e14e4f8caaad474e58eba24b.mp3str"
+
+[deps]
+
+source_file="res://ressources/audio/anime/GTO the Animation - Opening 1  Drivers High.mp3"
+dest_files=["res://.godot/imported/GTO the Animation - Opening 1  Drivers High.mp3-e3dd9001e14e4f8caaad474e58eba24b.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

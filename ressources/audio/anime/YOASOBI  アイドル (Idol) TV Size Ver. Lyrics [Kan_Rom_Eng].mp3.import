@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://p7fl4ikee8wu"
+path="res://.godot/imported/YOASOBI  アイドル (Idol) TV Size Ver. Lyrics [Kan_Rom_Eng].mp3-a8e04de856c1ffa2b8f21b789e627395.mp3str"
+
+[deps]
+
+source_file="res://ressources/audio/anime/YOASOBI  アイドル (Idol) TV Size Ver. Lyrics [Kan_Rom_Eng].mp3"
+dest_files=["res://.godot/imported/YOASOBI  アイドル (Idol) TV Size Ver. Lyrics [Kan_Rom_Eng].mp3-a8e04de856c1ffa2b8f21b789e627395.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
