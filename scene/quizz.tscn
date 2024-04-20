@@ -1,0 +1,67 @@
+[gd_scene load_steps=2 format=3 uid="uid://dobaw2urootrw"]
+
+[ext_resource type="Texture2D" uid="uid://5wg8gpdrrkd" path="res://ressources/fond.png" id="1_tdwux"]
+
+[node name="quizz" type="Node2D"]
+
+[node name="CanvasGroup" type="CanvasGroup" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasGroup"]
+position = Vector2(575.5, 369)
+scale = Vector2(2.33137, 1)
+texture = ExtResource("1_tdwux")
+
+[node name="Label" type="Label" parent="CanvasGroup"]
+offset_left = 244.0
+offset_top = -11.0
+offset_right = 906.0
+offset_bottom = 154.0
+theme_override_font_sizes/font_size = 118
+text = "QUIZZ TIME"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="CanvasGroup"]
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = 224.0
+offset_top = 202.0
+offset_right = 915.0
+offset_bottom = 406.0
+
+[node name="PlayButton" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 164.0
+offset_right = 63.0
+offset_bottom = 195.0
+text = "Play"
+
+[node name="StopButton" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 121.0
+offset_top = 166.0
+offset_right = 164.0
+offset_bottom = 197.0
+text = "Stop"
+
+[node name="progressBar" type="HSlider" parent="Panel"]
+layout_mode = 0
+offset_left = 38.0
+offset_top = 94.0
+offset_right = 642.0
+offset_bottom = 110.0
+
+[node name="ValidButton" type="Button" parent="."]
+offset_left = 825.0
+offset_top = 514.0
+offset_right = 1152.0
+offset_bottom = 647.0
+theme_override_font_sizes/font_size = 50
+text = "VALIDER"
+
+[node name="Answer" type="TextEdit" parent="."]
+offset_left = 230.0
+offset_top = 440.0
+offset_right = 802.0
+offset_bottom = 520.0

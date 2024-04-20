@@ -1,8 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://b3glr17p3ri3o"]
+[gd_scene load_steps=3 format=3 uid="uid://b3glr17p3ri3o"]
 
 [ext_resource type="Texture2D" uid="uid://5wg8gpdrrkd" path="res://ressources/fond.png" id="1_nr74w"]
+[ext_resource type="Script" path="res://scripts/initThemeChoiceList.cs" id="2_blmqb"]
 
-[node name="themeChoice" type="Node2D"]
+[node name="themeChoice" type="Node2D" node_paths=PackedStringArray("vBoxContainer")]
+script = ExtResource("2_blmqb")
+vBoxContainer = NodePath("CanvasGroup/ScrollContainer/VBoxContainer")
 
 [node name="CanvasGroup" type="CanvasGroup" parent="."]
 
@@ -33,24 +36,3 @@ size_flags_horizontal = 3
 size_flags_vertical = 6
 size_flags_stretch_ratio = 0.0
 theme_override_constants/separation = 50
-
-[node name="Button" type="Button" parent="CanvasGroup/ScrollContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_font_sizes/font_size = 50
-text = "Theme 1"
-
-[node name="Button2" type="Button" parent="CanvasGroup/ScrollContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 50
-text = "Theme 2"
-
-[node name="Button3" type="Button" parent="CanvasGroup/ScrollContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 50
-text = "Theme 3"
-
-[node name="Button4" type="Button" parent="CanvasGroup/ScrollContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 50
-text = "Theme 4"

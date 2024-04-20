@@ -12,7 +12,7 @@ public partial class GameManager : Node
 
 	List<string> themeList = new List<string>();
 	List<string> questionPulled = new List<string>();
-	private List<List<string>> themeChosen;
+	private string themeChosen;
 	public GameManager getInstance()
 	{
 		if (instance == null)
@@ -70,9 +70,18 @@ public partial class GameManager : Node
 
 	public void setThemeChosen(string theme)
 	{
-		themeChosen = themeData[theme];
+		themeChosen = theme;
 	}
 
-	
+	public string getThemeChosen()
+	{
+		return themeChosen ;
+	}
+	public void initAll()
+	{
+		initAnimeData();
+		initThemeData();
+		initThemeList();
+	}
 
 }
