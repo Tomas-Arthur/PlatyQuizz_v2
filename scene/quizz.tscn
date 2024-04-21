@@ -1,8 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://dobaw2urootrw"]
+[gd_scene load_steps=4 format=3 uid="uid://dobaw2urootrw"]
 
+[ext_resource type="Script" path="res://scripts/QuizzManager.cs" id="1_ksm1k"]
 [ext_resource type="Texture2D" uid="uid://5wg8gpdrrkd" path="res://ressources/fond.png" id="1_tdwux"]
+[ext_resource type="AudioStream" uid="uid://cuqdxnus8o442" path="res://ressources/audio/anime/Solo Leveling - Opening  Level.mp3" id="3_gkl11"]
 
-[node name="quizz" type="Node2D"]
+[node name="quizz" type="Node2D" node_paths=PackedStringArray("progressBar", "playButton", "pauseButton", "stopButton", "audioStreamPlayer")]
+script = ExtResource("1_ksm1k")
+progressBar = NodePath("Panel/progressBar")
+playButton = NodePath("Panel/PlayButton")
+pauseButton = NodePath("Panel/PauseButton")
+stopButton = NodePath("Panel/StopButton")
+audioStreamPlayer = NodePath("CanvasGroup/AudioStreamPlayer")
 
 [node name="CanvasGroup" type="CanvasGroup" parent="."]
 
@@ -22,6 +30,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="CanvasGroup"]
+stream = ExtResource("3_gkl11")
 
 [node name="Panel" type="Panel" parent="."]
 offset_left = 224.0
@@ -37,12 +46,21 @@ offset_right = 63.0
 offset_bottom = 195.0
 text = "Play"
 
+[node name="PauseButton" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 89.0
+offset_top = 163.0
+offset_right = 130.0
+offset_bottom = 194.0
+toggle_mode = true
+text = "Pause"
+
 [node name="StopButton" type="Button" parent="Panel"]
 layout_mode = 0
-offset_left = 121.0
-offset_top = 166.0
-offset_right = 164.0
-offset_bottom = 197.0
+offset_left = 160.0
+offset_top = 163.0
+offset_right = 203.0
+offset_bottom = 194.0
 text = "Stop"
 
 [node name="progressBar" type="HSlider" parent="Panel"]
@@ -65,3 +83,7 @@ offset_left = 230.0
 offset_top = 440.0
 offset_right = 802.0
 offset_bottom = 520.0
+
+[connection signal="pressed" from="Panel/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="Panel/PauseButton" to="." method="_on_pause_button_pressed"]
+[connection signal="pressed" from="Panel/StopButton" to="." method="_on_stop_button_pressed"]

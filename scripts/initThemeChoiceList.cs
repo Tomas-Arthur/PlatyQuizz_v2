@@ -26,7 +26,7 @@ public partial class initThemeChoiceList : Node
 		for (int i = 0; i <	listTheme.Count;i++)
 		{
 			GD.Print("nouveau bouton : "+listTheme[i]);
-			 var myButton = new MyButton();
+			 var myButton = new Button();
     		myButton.Text = listTheme[i];
     		vBoxContainer.AddChild(myButton);
 			
