@@ -13,13 +13,14 @@ public partial class initThemeChoiceList : Node
 	VBoxContainer vBoxContainer;
 
 	List<string> listTheme = new List<string>();
-	public GameManager instanceGM = new GameManager();
+	public GameManager instanceGM;
 	
 	
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		instanceGM = GameManager.getInstance();
 		instanceGM.initAll();
 		listTheme = instanceGM.getThemeList();
 		GD.Print("nombre de themes : "+listTheme.Count);
@@ -40,6 +41,9 @@ public partial class initThemeChoiceList : Node
 		GD.Print("My name is : "+name);
 		instanceGM.setThemeChosen(name);
 		GD.Print("theme choosen : "+instanceGM.getThemeChosen());
+		//string [] test = instanceGM.getQuestion();
+		Node simultaneousScene = ResourceLoader.Load<PackedScene>("res://scene/quizz.tscn").Instantiate();
+		GetTree().Root.AddChild(simultaneousScene);
    }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -48,19 +48,19 @@ text = "Play"
 
 [node name="PauseButton" type="Button" parent="Panel"]
 layout_mode = 0
-offset_left = 89.0
+offset_left = 137.0
 offset_top = 163.0
-offset_right = 130.0
+offset_right = 192.0
 offset_bottom = 194.0
 toggle_mode = true
 text = "Pause"
 
 [node name="StopButton" type="Button" parent="Panel"]
 layout_mode = 0
-offset_left = 160.0
-offset_top = 163.0
-offset_right = 203.0
-offset_bottom = 194.0
+offset_left = 247.0
+offset_top = 162.0
+offset_right = 290.0
+offset_bottom = 193.0
 text = "Stop"
 
 [node name="progressBar" type="HSlider" parent="Panel"]
@@ -69,6 +69,15 @@ offset_left = 38.0
 offset_top = 94.0
 offset_right = 642.0
 offset_bottom = 110.0
+
+[node name="VolumeBar" type="HSlider" parent="Panel"]
+layout_mode = 0
+offset_left = 431.0
+offset_top = 175.0
+offset_right = 676.0
+offset_bottom = 191.0
+min_value = -50.0
+max_value = 50.0
 
 [node name="ValidButton" type="Button" parent="."]
 offset_left = 825.0
@@ -87,3 +96,4 @@ offset_bottom = 520.0
 [connection signal="pressed" from="Panel/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="Panel/PauseButton" to="." method="_on_pause_button_pressed"]
 [connection signal="pressed" from="Panel/StopButton" to="." method="_on_stop_button_pressed"]
+[connection signal="value_changed" from="Panel/VolumeBar" to="." method="_on_volume_bar_value_changed"]
