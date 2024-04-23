@@ -6,26 +6,25 @@ using System.IO;
 public partial class QuizzManager : Node
 {
 
-[Export]
-TextEdit textEdit;
-[Export]
 
-    Popup suggestionPopup;
 	[Export]
+	public PopupPanel popupPanel;
+	[Export]
+	public Label popupLabel;
 
-    ItemList suggestionItemList;
-List<string> suggestions = new List<string>()
-    {
-        "Suggestion 1",
-        "Suggestion 2",
-        "Suggestion 3"
-    };
+	[Export]
+	TextEdit answerText;
+
+	[Export]
+	ItemList suggestionItemList;
 /// <summary>
 
 /// </summary>
 
 	[Export]
 	public Slider progressBar;
+	[Export]
+	public Slider volumeBar;
 	[Export]
 	public Button playButton;
 	[Export]
@@ -48,12 +47,23 @@ List<string> suggestions = new List<string>()
 		pauseButton.Disabled = true;
 		stopButton.Disabled = true;
 
+		audioStreamPlayer.VolumeDb = instanceGM.getVolume();
+		volumeBar.Value = instanceGM.getVolume();
 
 		questionActuel = instanceGM.getQuestion();
+		if(questionActuel == null)
+		{
+			Node simultaneousScene = ResourceLoader.Load<PackedScene>("res://scene/endGame.tscn").Instantiate();
+			GetTree().Root.AddChild(simultaneousScene);
+		}
 		audioStreamPlayer.Stream = (AudioStream)ResourceLoader.Load(questionActuel[1]);
 		listChoosen = instanceGM.getListChoosen();
-		 // Connectez le signal item_selected à la méthode de gestion de l'événement
-       // suggestionItemList.ItemSelected +=  () => OnSuggestionSelected(1);
+		 
+		 for (int i = 0;i< listChoosen.Count;i++)
+		 {
+			
+			suggestionItemList.AddItem(listChoosen[i][0]);
+		 }
 
 	}
 
@@ -113,6 +123,7 @@ List<string> suggestions = new List<string>()
 	private void _on_volume_bar_value_changed(float value)
 	{
 		audioStreamPlayer.VolumeDb = value;
+		instanceGM.setVolume(value);
 	}
 
 private void OnTextChanged()
@@ -121,19 +132,19 @@ private void OnTextChanged()
         suggestionItemList.Clear();
 
         // Obtenez le texte actuel dans le TextEdit
-        string currentText = textEdit.Text.ToLower();
+        string currentText = answerText.Text.ToLower();
 
         // Affichez les suggestions qui correspondent au texte actuel
-        foreach (string suggestion in suggestions)
-        {
-            if (suggestion.ToLower().StartsWith(currentText))
+        for (int i = 0;i< listChoosen.Count;i++)
+		 {
+			
+
+            if (listChoosen[i][0].ToLower().Contains(currentText))
             {
-                suggestionItemList.AddItem(suggestion);
+                suggestionItemList.AddItem(listChoosen[i][0]);
             }
         }
 
-        // Afficher le Popup si des suggestions sont disponibles
-        suggestionPopup.Visible = suggestionItemList.ItemCount > 0;
     }
 
     private void OnSuggestionSelected(int index)
@@ -142,9 +153,34 @@ private void OnTextChanged()
         string selectedSuggestion = suggestionItemList.GetItemText(index);
 
         // Remplacez le texte du TextEdit par la suggestion sélectionnée
-        textEdit.Text = selectedSuggestion;
+        answerText.Text = selectedSuggestion;
 
-        // Masquez le Popup
-        suggestionPopup.Visible = false;
     }
+
+
+	private void _on_valid_button_pressed()
+	{
+		audioStreamPlayer.Stop();
+		if(answerText.Text == questionActuel[0])
+		{
+			instanceGM.incrementScore();
+			
+			popupLabel.Text = "vous avez donnez la bonne reponse";
+			popupPanel.Show();
+			
+		}
+		else
+		{
+			popupLabel.Text = "vous avez donnez la reponse : "+answerText.Text+"  la bonne reponse etait : "+questionActuel[0];
+			popupPanel.Show();
+		}
+	}
+
+	private void _on_button_pop_up_pressed()
+	{
+		popupPanel.Hide();
+		Node simultaneousScene = ResourceLoader.Load<PackedScene>("res://scene/quizz.tscn").Instantiate();
+		GetTree().Root.AddChild(simultaneousScene);
+	}
+
 }

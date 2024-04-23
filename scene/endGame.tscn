@@ -1,0 +1,55 @@
+[gd_scene load_steps=3 format=3 uid="uid://cibil4xitchk7"]
+
+[ext_resource type="Script" path="res://scripts/endGame.cs" id="1_s0psp"]
+[ext_resource type="Texture2D" uid="uid://5wg8gpdrrkd" path="res://ressources/fond.png" id="2_bah8b"]
+
+[node name="endGame" type="Node2D" node_paths=PackedStringArray("valeurScore")]
+script = ExtResource("1_s0psp")
+valeurScore = NodePath("CanvasGroup/valeurScore")
+
+[node name="CanvasGroup" type="CanvasGroup" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasGroup"]
+position = Vector2(586.5, 354)
+scale = Vector2(2.53529, 1)
+texture = ExtResource("2_bah8b")
+
+[node name="Titre" type="Label" parent="CanvasGroup"]
+offset_left = 189.0
+offset_top = -11.0
+offset_right = 1036.0
+offset_bottom = 154.0
+theme_override_font_sizes/font_size = 118
+text = "Fin de la partie"
+
+[node name="text" type="Label" parent="CanvasGroup"]
+offset_left = 66.0
+offset_top = 250.0
+offset_right = 411.0
+offset_bottom = 311.0
+theme_override_font_sizes/font_size = 40
+text = "votre score est de"
+
+[node name="valeurScore" type="Label" parent="CanvasGroup"]
+offset_left = 444.0
+offset_top = 246.0
+offset_right = 568.0
+offset_bottom = 307.0
+theme_override_font_sizes/font_size = 40
+
+[node name="Buttonretour" type="Button" parent="."]
+offset_left = 92.0
+offset_top = 515.0
+offset_right = 364.0
+offset_bottom = 593.0
+text = "Retour au choix des thémes"
+
+[node name="Buttonquitter" type="Button" parent="."]
+offset_left = 708.0
+offset_top = 525.0
+offset_right = 980.0
+offset_bottom = 603.0
+text = "Quitter l'application"
+
+[connection signal="pressed" from="Buttonretour" to="." method="_on_buttonretour_pressed"]
+[connection signal="pressed" from="Buttonquitter" to="." method="_on_buttonquitter_pressed"]

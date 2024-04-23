@@ -8,14 +8,15 @@ public partial class GameManager : Node
 	
 	List<string[]> animeData = new List<string[]>();
 	List<string[]> listChoosen;
-	
+	private int getQuestionCount =0;
 	Dictionary<string, List<string[]>> themeData = new Dictionary<string, List<string[]>>();
 
 	List<string> themeList = new List<string>();
 	List<string> questionPulled = new List<string>();
 	private string themeChosen;
 
-
+	private int score =0;
+	private float volume;
 	
 
 	public static GameManager getInstance()
@@ -23,6 +24,7 @@ public partial class GameManager : Node
 		if (instance == null)
 		{
 			instance = new GameManager();
+			instance.initAll();
 		}
 		return instance;
 	}
@@ -68,7 +70,7 @@ public partial class GameManager : Node
 	{
 		string[] answer = new string[2];
 		Random i = new Random();
-		int value = i.Next(0,10);
+		int value = i.Next(0,listChoosen.Count);
 		//GD.Print("listChoosen["+value+"][0] : "+listChoosen[value][0]);
 		if(!questionPulled.Contains( listChoosen[value][0]))
 		{
@@ -80,7 +82,16 @@ public partial class GameManager : Node
 		}
 		else
 		{
-			return getQuestion();
+			if(getQuestionCount < listChoosen.Count)
+			{
+				getQuestionCount++;
+				return getQuestion();
+			}
+			else
+			{
+				
+				return null;
+			}
 		}
 	}
 
@@ -106,10 +117,29 @@ public partial class GameManager : Node
 	public void resetVariables()
 	{
 		questionPulled.Clear();
+		getQuestionCount =0;
 	}
 	public List<string[]> getListChoosen()
 	{
 		return listChoosen;
+	}
+
+	public int getScore()
+	{
+		return score;
+	}
+	public void incrementScore()
+	{
+		score++;
+	}
+
+	public float getVolume()
+	{
+		return volume;
+	}
+	public void setVolume(float newVolume)
+	{
+		volume = newVolume;
 	}
 
 }
