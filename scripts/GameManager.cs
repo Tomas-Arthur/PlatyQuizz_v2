@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public partial class GameManager : Node
 {
 	private static GameManager instance;
-	
+	public int nbQuestion = 0;
 	List<string[]> animeData = new List<string[]>();
 	List<string[]> listChoosen;
 	private int getQuestionCount =0;
@@ -78,6 +78,7 @@ public partial class GameManager : Node
 			answer[1]=listChoosen[value][1];
 			//GD.Print("valeur de answer : "+answer[0]+" "+answer[1]);
 			questionPulled.Add(answer[0]);
+			nbQuestion ++;
 			return answer;
 		}
 		else
@@ -118,6 +119,8 @@ public partial class GameManager : Node
 	{
 		questionPulled.Clear();
 		getQuestionCount =0;
+		score =0;
+		nbQuestion =0;
 	}
 	public List<string[]> getListChoosen()
 	{
@@ -142,4 +145,8 @@ public partial class GameManager : Node
 		volume = newVolume;
 	}
 
+	public int getNbQuestion()
+	{
+		return nbQuestion;
+	}
 }

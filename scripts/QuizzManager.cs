@@ -6,6 +6,9 @@ using System.IO;
 public partial class QuizzManager : Node
 {
 
+	[Export]
+	public Label scoreActuel;
+	
 
 	[Export]
 	public PopupPanel popupPanel;
@@ -57,6 +60,7 @@ public partial class QuizzManager : Node
 			GetTree().Root.AddChild(simultaneousScene);
 			return;
 		}
+		scoreActuel.Text = "Score : "+instanceGM.getScore()+" / "+instanceGM.getNbQuestion();
 		audioStreamPlayer.Stream = (AudioStream)ResourceLoader.Load(questionActuel[1]);
 		listChoosen = instanceGM.getListChoosen();
 		 
