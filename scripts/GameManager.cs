@@ -82,7 +82,7 @@ public partial class GameManager : Node
 		}
 		else
 		{
-			if(getQuestionCount < listChoosen.Count)
+			if(getQuestionCount < 1000)
 			{
 				getQuestionCount++;
 				return getQuestion();

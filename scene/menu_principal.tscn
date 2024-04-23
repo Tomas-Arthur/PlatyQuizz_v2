@@ -25,6 +25,7 @@ offset_left = 489.0
 offset_top = 355.0
 offset_right = 656.0
 offset_bottom = 446.0
+disabled = true
 text = "Host"
 
 [node name="ExitButton" type="Button" parent="CanvasGroup"]
@@ -46,3 +47,4 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [connection signal="pressed" from="CanvasGroup/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="CanvasGroup/ExitButton" to="." method="_on_exit_button_pressed"]

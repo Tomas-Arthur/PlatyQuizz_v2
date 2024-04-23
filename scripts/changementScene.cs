@@ -22,7 +22,10 @@ public partial class changementScene : Node
 	}
 
 
-
+	private void _on_exit_button_pressed()
+	{
+		GetTree().Quit();
+	}
 
 
 }

@@ -55,6 +55,7 @@ public partial class QuizzManager : Node
 		{
 			Node simultaneousScene = ResourceLoader.Load<PackedScene>("res://scene/endGame.tscn").Instantiate();
 			GetTree().Root.AddChild(simultaneousScene);
+			return;
 		}
 		audioStreamPlayer.Stream = (AudioStream)ResourceLoader.Load(questionActuel[1]);
 		listChoosen = instanceGM.getListChoosen();
