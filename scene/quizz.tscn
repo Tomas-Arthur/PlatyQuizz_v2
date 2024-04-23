@@ -4,8 +4,11 @@
 [ext_resource type="Texture2D" uid="uid://5wg8gpdrrkd" path="res://ressources/fond.png" id="1_tdwux"]
 [ext_resource type="AudioStream" uid="uid://cuqdxnus8o442" path="res://ressources/audio/anime/Solo Leveling - Opening  Level.mp3" id="3_gkl11"]
 
-[node name="quizz" type="Node2D" node_paths=PackedStringArray("progressBar", "playButton", "pauseButton", "stopButton", "audioStreamPlayer")]
+[node name="quizz" type="Node2D" node_paths=PackedStringArray("textEdit", "suggestionPopup", "suggestionItemList", "progressBar", "playButton", "pauseButton", "stopButton", "audioStreamPlayer")]
 script = ExtResource("1_ksm1k")
+textEdit = NodePath("Answer")
+suggestionPopup = NodePath("Popup")
+suggestionItemList = NodePath("ItemList")
 progressBar = NodePath("Panel/progressBar")
 playButton = NodePath("Panel/PlayButton")
 pauseButton = NodePath("Panel/PauseButton")
@@ -87,11 +90,20 @@ offset_bottom = 647.0
 theme_override_font_sizes/font_size = 50
 text = "VALIDER"
 
+[node name="Popup" type="Popup" parent="."]
+size = Vector2i(232, 517)
+
 [node name="Answer" type="TextEdit" parent="."]
 offset_left = 230.0
 offset_top = 440.0
 offset_right = 802.0
 offset_bottom = 520.0
+
+[node name="ItemList" type="ItemList" parent="."]
+offset_left = 232.0
+offset_top = 517.0
+offset_right = 272.0
+offset_bottom = 557.0
 
 [connection signal="pressed" from="Panel/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="Panel/PauseButton" to="." method="_on_pause_button_pressed"]

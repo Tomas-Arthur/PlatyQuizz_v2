@@ -69,11 +69,19 @@ public partial class GameManager : Node
 		string[] answer = new string[2];
 		Random i = new Random();
 		int value = i.Next(0,10);
-		GD.Print("listChoosen["+value+"][0] : "+listChoosen[value][0]);
-		answer[0]=listChoosen[value][0];
-		answer[1]=listChoosen[value][1];
-		GD.Print("valeur de answer : "+answer[0]+" "+answer[1]);
-		return answer;
+		//GD.Print("listChoosen["+value+"][0] : "+listChoosen[value][0]);
+		if(!questionPulled.Contains( listChoosen[value][0]))
+		{
+			answer[0]=listChoosen[value][0];
+			answer[1]=listChoosen[value][1];
+			//GD.Print("valeur de answer : "+answer[0]+" "+answer[1]);
+			questionPulled.Add(answer[0]);
+			return answer;
+		}
+		else
+		{
+			return getQuestion();
+		}
 	}
 
 
@@ -82,11 +90,6 @@ public partial class GameManager : Node
 	{
 		themeChosen = theme;
 		listChoosen = themeData[theme];
-		/*for (int i = 0; i < listChoosen.Count;i++)
-		{
-			GD.Print("listChoosen["+i+"][0] : "+listChoosen[i][0]); // reponse 
-			GD.Print("listChoosen["+i+"][1] : "+listChoosen[i][1]); // resource music
-		}*/
 	}
 
 	public string getThemeChosen()
@@ -102,7 +105,11 @@ public partial class GameManager : Node
 
 	public void resetVariables()
 	{
-
+		questionPulled.Clear();
+	}
+	public List<string[]> getListChoosen()
+	{
+		return listChoosen;
 	}
 
 }
