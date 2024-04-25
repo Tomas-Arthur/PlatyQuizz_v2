@@ -1,0 +1,93 @@
+[gd_scene load_steps=3 format=3 uid="uid://yebbdvaucjwj"]
+
+[ext_resource type="Script" path="res://scripts/settings.cs" id="1_pc64y"]
+[ext_resource type="Texture2D" uid="uid://5wg8gpdrrkd" path="res://ressources/fond.png" id="1_xrgn8"]
+
+[node name="Settings" type="Node2D" node_paths=PackedStringArray("fileDialogRessources", "reponse", "ressource", "cible", "fileDialogCible")]
+script = ExtResource("1_pc64y")
+fileDialogRessources = NodePath("FileDRessouces")
+reponse = NodePath("reponse")
+ressource = NodePath("ressources")
+cible = NodePath("DirCible")
+fileDialogCible = NodePath("FileDEmplacement")
+
+[node name="FileDRessouces" type="FileDialog" parent="."]
+mode = 2
+title = "Open a File"
+position = Vector2i(260, 185)
+size = Vector2i(442, 377)
+ok_button_text = "Ouvrir"
+file_mode = 0
+access = 2
+
+[node name="CanvasGroup" type="CanvasGroup" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasGroup"]
+position = Vector2(584.5, 325)
+scale = Vector2(2.26078, 0.84183)
+texture = ExtResource("1_xrgn8")
+
+[node name="BTN_File" type="Button" parent="."]
+offset_left = 59.0
+offset_top = 558.0
+offset_right = 221.0
+offset_bottom = 606.0
+text = "Choisir Morceau"
+
+[node name="AddButton" type="Button" parent="."]
+offset_left = 246.0
+offset_top = 563.0
+offset_right = 384.0
+offset_bottom = 605.0
+text = "Ajouter"
+
+[node name="Label" type="Label" parent="."]
+offset_left = 88.0
+offset_top = 163.0
+offset_right = 128.0
+offset_bottom = 186.0
+text = "Ajouter un nouveau Morceau"
+
+[node name="reponse" type="TextEdit" parent="."]
+offset_left = 63.0
+offset_top = 438.0
+offset_right = 283.0
+offset_bottom = 477.0
+placeholder_text = "Reponse lier au morceau"
+
+[node name="ressources" type="TextEdit" parent="."]
+offset_left = 61.0
+offset_top = 496.0
+offset_right = 281.0
+offset_bottom = 535.0
+placeholder_text = "Emplacement morceau"
+editable = false
+
+[node name="FileDEmplacement" type="FileDialog" parent="."]
+title = "Open a Directory"
+position = Vector2i(260, 185)
+size = Vector2i(442, 377)
+ok_button_text = "Sélectionner le dossier courant"
+file_mode = 2
+access = 2
+
+[node name="DirCible" type="TextEdit" parent="."]
+offset_left = 61.0
+offset_top = 332.0
+offset_right = 281.0
+offset_bottom = 371.0
+placeholder_text = "Emplacement cible"
+editable = false
+
+[node name="BTN_cible" type="Button" parent="."]
+offset_left = 62.0
+offset_top = 380.0
+offset_right = 283.0
+offset_bottom = 423.0
+text = "Choisir l'emplacement cible"
+
+[connection signal="file_selected" from="FileDRessouces" to="." method="onFileSelected"]
+[connection signal="pressed" from="BTN_File" to="." method="_on_test_otest_button_pressed"]
+[connection signal="pressed" from="AddButton" to="." method="_on_add_button_pressed"]
+[connection signal="dir_selected" from="FileDEmplacement" to="." method="_on_file_d_emplacement_dir_selected"]
+[connection signal="pressed" from="BTN_cible" to="." method="_on_btn_cible_pressed"]
