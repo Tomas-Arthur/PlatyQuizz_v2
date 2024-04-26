@@ -27,5 +27,10 @@ public partial class changementScene : Node
 		GetTree().Quit();
 	}
 
-
+	private void _on_setting_button_pressed()
+	{
+		GD.Print("changement de scene ");
+		Node simultaneousScene = ResourceLoader.Load<PackedScene>("res://scene/Settings.tscn").Instantiate();
+		GetTree().Root.AddChild(simultaneousScene);
+	}
 }

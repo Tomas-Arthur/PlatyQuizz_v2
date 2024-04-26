@@ -8,7 +8,8 @@ public partial class QuizzManager : Node
 
 	[Export]
 	public Label scoreActuel;
-	
+	[Export]
+	public Timer timer;
 
 	[Export]
 	public PopupPanel popupPanel;
@@ -170,19 +171,31 @@ private void OnTextChanged()
 		{
 			instanceGM.incrementScore();
 			
-			popupLabel.Text = "vous avez donnez la bonne reponse";
+			popupLabel.Text = questionActuel[0] ;
+			popupLabel.Modulate = new Color(0,1,0,1);
 			popupPanel.Show();
 			
+			timer.Start();
 		}
 		else
 		{
-			popupLabel.Text = "vous avez donnez la reponse : "+answerText.Text+"  la bonne reponse etait : "+questionActuel[0];
+			popupLabel.Text = questionActuel[0];
+			popupLabel.Modulate = new Color(1,0,0,1);
 			popupPanel.Show();
+			timer.Start();
 		}
 	}
 
 	private void _on_button_pop_up_pressed()
 	{
+		popupPanel.Hide();
+		Node simultaneousScene = ResourceLoader.Load<PackedScene>("res://scene/quizz.tscn").Instantiate();
+		GetTree().Root.AddChild(simultaneousScene);
+	}
+
+	private void _on_timer_timeout()
+	{
+		timer.Stop();
 		popupPanel.Hide();
 		Node simultaneousScene = ResourceLoader.Load<PackedScene>("res://scene/quizz.tscn").Instantiate();
 		GetTree().Root.AddChild(simultaneousScene);

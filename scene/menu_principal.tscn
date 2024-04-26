@@ -52,8 +52,10 @@ offset_left = 1062.0
 offset_top = 559.0
 offset_right = 1146.0
 offset_bottom = 637.0
+disabled = true
 icon = ExtResource("3_e0ocs")
 expand_icon = true
 
 [connection signal="pressed" from="CanvasGroup/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="CanvasGroup/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="SettingButton" to="." method="_on_setting_button_pressed"]

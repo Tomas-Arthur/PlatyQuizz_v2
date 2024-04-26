@@ -4,9 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://5wg8gpdrrkd" path="res://ressources/fond.png" id="1_tdwux"]
 [ext_resource type="AudioStream" uid="uid://cuqdxnus8o442" path="res://ressources/audio/anime/Solo Leveling - Opening  Level.mp3" id="3_gkl11"]
 
-[node name="quizz" type="Node2D" node_paths=PackedStringArray("scoreActuel", "popupPanel", "popupLabel", "answerText", "suggestionItemList", "progressBar", "volumeBar", "playButton", "pauseButton", "stopButton", "audioStreamPlayer")]
+[node name="quizz" type="Node2D" node_paths=PackedStringArray("scoreActuel", "timer", "popupPanel", "popupLabel", "answerText", "suggestionItemList", "progressBar", "volumeBar", "playButton", "pauseButton", "stopButton", "audioStreamPlayer")]
 script = ExtResource("1_ksm1k")
 scoreActuel = NodePath("ScoreActuel")
+timer = NodePath("Timer")
 popupPanel = NodePath("PopupPanel")
 popupLabel = NodePath("PopupPanel/labelPopUp")
 answerText = NodePath("Answer")
@@ -106,21 +107,19 @@ offset_right = 802.0
 offset_bottom = 614.0
 
 [node name="PopupPanel" type="PopupPanel" parent="."]
-position = Vector2i(190, 110)
-size = Vector2i(500, 500)
+position = Vector2i(445, 390)
+size = Vector2i(250, 230)
 
 [node name="labelPopUp" type="Label" parent="PopupPanel"]
 offset_left = 4.0
 offset_top = 4.0
-offset_right = 496.0
-offset_bottom = 496.0
+offset_right = 246.0
+offset_bottom = 226.0
+text = "fesefefefefefefefef"
+horizontal_alignment = 1
 
-[node name="ButtonPopUp" type="Button" parent="PopupPanel"]
-offset_left = 4.0
-offset_top = 4.0
-offset_right = 496.0
-offset_bottom = 496.0
-text = "Question suivante"
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
 
 [node name="ScoreActuel" type="Label" parent="."]
 offset_left = 856.0
@@ -136,4 +135,4 @@ theme_override_font_sizes/font_size = 39
 [connection signal="pressed" from="ValidButton" to="." method="_on_valid_button_pressed"]
 [connection signal="text_changed" from="Answer" to="." method="OnTextChanged"]
 [connection signal="item_selected" from="ItemList" to="." method="OnSuggestionSelected"]
-[connection signal="pressed" from="PopupPanel/ButtonPopUp" to="." method="_on_button_pop_up_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
