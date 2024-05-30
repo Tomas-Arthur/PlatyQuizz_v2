@@ -1,15 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://yebbdvaucjwj"]
+[gd_scene load_steps=4 format=3 uid="uid://yebbdvaucjwj"]
 
 [ext_resource type="Script" path="res://scripts/settings.cs" id="1_pc64y"]
 [ext_resource type="Texture2D" uid="uid://5wg8gpdrrkd" path="res://ressources/fond.png" id="1_xrgn8"]
+[ext_resource type="AudioStream" uid="uid://b5vn17fniqat7" path="res://ressources/One Piece - Binks Sake (Japanese Version).mp3" id="3_li72u"]
 
-[node name="Settings" type="Node2D" node_paths=PackedStringArray("fileDialogRessources", "reponse", "ressource", "cible", "fileDialogCible")]
+[node name="Settings" type="Node2D" node_paths=PackedStringArray("fileDialogRessources", "reponse", "ressource", "cible", "fileDialogCible", "audioStreamPlayer", "volumeBar")]
 script = ExtResource("1_pc64y")
 fileDialogRessources = NodePath("FileDRessouces")
 reponse = NodePath("reponse")
 ressource = NodePath("ressources")
 cible = NodePath("DirCible")
 fileDialogCible = NodePath("FileDEmplacement")
+audioStreamPlayer = NodePath("Label2/AudioStreamPlayer")
+volumeBar = NodePath("Label2/VolumeBar")
 
 [node name="FileDRessouces" type="FileDialog" parent="."]
 mode = 2
@@ -41,12 +44,44 @@ offset_right = 384.0
 offset_bottom = 605.0
 text = "Ajouter"
 
+[node name="AddButton2" type="Button" parent="."]
+offset_left = 724.0
+offset_top = 274.0
+offset_right = 862.0
+offset_bottom = 316.0
+text = "Play Test Audio"
+
+[node name="AddButton3" type="Button" parent="."]
+offset_left = 886.0
+offset_top = 276.0
+offset_right = 1024.0
+offset_bottom = 318.0
+text = "Stop Test Audio"
+
 [node name="Label" type="Label" parent="."]
 offset_left = 88.0
 offset_top = 163.0
 offset_right = 128.0
 offset_bottom = 186.0
 text = "Ajouter un nouveau Morceau"
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 750.0
+offset_top = 150.0
+offset_right = 976.0
+offset_bottom = 176.0
+text = "Parametre son"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Label2"]
+stream = ExtResource("3_li72u")
+
+[node name="VolumeBar" type="HSlider" parent="Label2"]
+offset_left = -9.0
+offset_top = 75.0
+offset_right = 236.0
+offset_bottom = 91.0
+min_value = -50.0
+max_value = 50.0
 
 [node name="reponse" type="TextEdit" parent="."]
 offset_left = 63.0
@@ -89,5 +124,8 @@ text = "Choisir l'emplacement cible"
 [connection signal="file_selected" from="FileDRessouces" to="." method="onFileSelected"]
 [connection signal="pressed" from="BTN_File" to="." method="_on_test_otest_button_pressed"]
 [connection signal="pressed" from="AddButton" to="." method="_on_add_button_pressed"]
+[connection signal="pressed" from="AddButton2" to="." method="_on_Pressed_To_Play_Test"]
+[connection signal="pressed" from="AddButton3" to="." method="_on_Pressed_To_Stop_Test"]
+[connection signal="value_changed" from="Label2/VolumeBar" to="." method="_on_volume_bar_value_changed"]
 [connection signal="dir_selected" from="FileDEmplacement" to="." method="_on_file_d_emplacement_dir_selected"]
 [connection signal="pressed" from="BTN_cible" to="." method="_on_btn_cible_pressed"]

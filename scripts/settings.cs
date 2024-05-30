@@ -4,6 +4,7 @@ using System.IO;
 
 public partial class settings : Node
 {
+		public GameManager instanceGM ;
 	[Export]
 	public FileDialog fileDialogRessources;
 	[Export]
@@ -16,10 +17,20 @@ public partial class settings : Node
 	[Export]
 	FileDialog fileDialogCible;
 
+
+	// settings son
+	[Export]
+	AudioStreamPlayer audioStreamPlayer;
+	[Export]
+	public Slider volumeBar;
+	
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		
+		instanceGM = GameManager.getInstance();
+		volumeBar.Value = instanceGM.getVolume();
+		audioStreamPlayer.VolumeDb = instanceGM.getVolume();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -60,6 +71,20 @@ public partial class settings : Node
 
 
 
+	private void _on_volume_bar_value_changed(float value)
+	{
+		
+		audioStreamPlayer.VolumeDb = value;
+		instanceGM.setVolume(value);
+	}
 
+	private void _on_Pressed_To_Play_Test()
+	{
+		audioStreamPlayer.Play();
+	}
 
+	private void _on_Pressed_To_Stop_Test()
+	{
+		audioStreamPlayer.Stop();
+	}
 }
