@@ -36,3 +36,20 @@ size_flags_horizontal = 3
 size_flags_vertical = 6
 size_flags_stretch_ratio = 0.0
 theme_override_constants/separation = 50
+
+[node name="BTN_cible2" type="Button" parent="."]
+offset_left = 10.0
+offset_top = 595.0
+offset_right = 128.0
+offset_bottom = 638.0
+text = "retour menu"
+
+[node name="BTN_cible3" type="Button" parent="."]
+offset_left = 153.0
+offset_top = 595.0
+offset_right = 271.0
+offset_bottom = 638.0
+text = "save to json"
+
+[connection signal="pressed" from="BTN_cible2" to="." method="_on_btn_pressed_retour"]
+[connection signal="pressed" from="BTN_cible3" to="." method="on_pressed_save_to_json"]

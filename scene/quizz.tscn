@@ -99,8 +99,10 @@ offset_left = 230.0
 offset_top = 440.0
 offset_right = 802.0
 offset_bottom = 520.0
+placeholder_text = "entrez votre reponse"
 
 [node name="ItemList" type="ItemList" parent="."]
+visible = false
 offset_left = 232.0
 offset_top = 520.0
 offset_right = 802.0
@@ -128,6 +130,13 @@ offset_right = 1121.0
 offset_bottom = 503.0
 theme_override_font_sizes/font_size = 39
 
+[node name="BTN_cible2" type="Button" parent="."]
+offset_left = 9.0
+offset_top = 601.0
+offset_right = 127.0
+offset_bottom = 644.0
+text = "retour menu"
+
 [connection signal="pressed" from="Panel/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="Panel/PauseButton" to="." method="_on_pause_button_pressed"]
 [connection signal="pressed" from="Panel/StopButton" to="." method="_on_stop_button_pressed"]
@@ -136,3 +145,4 @@ theme_override_font_sizes/font_size = 39
 [connection signal="text_changed" from="Answer" to="." method="OnTextChanged"]
 [connection signal="item_selected" from="ItemList" to="." method="OnSuggestionSelected"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="pressed" from="BTN_cible2" to="." method="_on_btn_pressed_retour"]

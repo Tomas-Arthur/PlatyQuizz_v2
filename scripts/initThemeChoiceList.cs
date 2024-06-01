@@ -52,5 +52,16 @@ public partial class initThemeChoiceList : Node
 	{
 	}
 
+	private void _on_btn_pressed_retour()
+	{
+		Node simultaneousScene = ResourceLoader.Load<PackedScene>("res://scene/menu_principal.tscn").Instantiate();
+		GetTree().Root.AddChild(simultaneousScene);
+	}
 	
+
+	private void on_pressed_save_to_json()
+	{
+		instanceGM.saveDictionaryToJSON();
+	}
+
 }

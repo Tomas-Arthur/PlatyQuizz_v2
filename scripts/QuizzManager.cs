@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 public partial class QuizzManager : Node
 {
@@ -136,7 +137,10 @@ private void OnTextChanged()
     {
         // Effacez les anciennes suggestions
         suggestionItemList.Clear();
-
+		if( answerText.Text.Length > 0 )
+		suggestionItemList.Visible = true;
+		else
+		suggestionItemList.Visible = false;
         // Obtenez le texte actuel dans le TextEdit
         string currentText = answerText.Text.ToLower();
 
@@ -200,5 +204,16 @@ private void OnTextChanged()
 		Node simultaneousScene = ResourceLoader.Load<PackedScene>("res://scene/quizz.tscn").Instantiate();
 		GetTree().Root.AddChild(simultaneousScene);
 	}
+
+
+	private void _on_btn_pressed_retour()
+	{
+		Node simultaneousScene = ResourceLoader.Load<PackedScene>("res://scene/menu_principal.tscn").Instantiate();
+		GetTree().Root.AddChild(simultaneousScene);
+	}
+
+
+
+	
 
 }

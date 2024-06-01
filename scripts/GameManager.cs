@@ -1,7 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
-
+using System.Text.Json;
 public partial class GameManager : Node
 {
 	private static GameManager instance;
@@ -28,31 +28,19 @@ public partial class GameManager : Node
 		}
 		return instance;
 	}
-	
-	public void initAnimeData()
-	{		
-		animeData.Add(new string[2] { "Fullmetal Alchemist", "03 - again (TV Size) (YUI) ~ FMA Brotherhood (OST I) - [ZR].mp3" });
-		animeData.Add(new string[2] { "Attack On Titan", "Attack On Titan Opening 1 Guren No Yumiya (Tv Size).mp3" });
-		animeData.Add(new string[2] { "Beastars", "BEASTARS Season 2 OP (Clean)  Kaibutsu - YOASOBI  Netflix Anime.mp3" });
-		animeData.Add(new string[2] { "Fire Force", "Fire Force - Opening  Inferno.mp3" });
-		animeData.Add(new string[2] { "Great Teacher Onizuka", "GTO the Animation - Opening 1  Drivers High.mp3" });
-		animeData.Add(new string[2] { "One Piece", "One Piece OP 1 - We Are! Lyrics.mp3" });
-		animeData.Add(new string[2] { "Your Lie in April", "Shigatsu wa Kimi no Uso - Opening 1 - TV size with video.mp3" });
-		animeData.Add(new string[2] { "Solo Leveling", "Solo Leveling - Opening  Level.mp3" });
-		animeData.Add(new string[2] { "Black Clover", "Vicke Blanka - Black Catcher (Anime music video, TV anime「Black Clover」OP10 Theme).mp3" });
-		animeData.Add(new string[2] { "Oshi no Ko", "YOASOBI  アイドル (Idol) TV Size Ver. Lyrics [Kan_Rom_Eng].mp3" });
-	}
     
 	public List<string[]> getAnimeData()
 	{
 		return animeData;
 	}
 
-	public	void initThemeData()
-	{
-		themeData.Add("anime",animeData);
-	}
+
 	
+	public void addToThemeData(string theme,string[] values)
+	{
+		themeData[theme].Add(values) ;
+	}
+
 	public void initThemeList()
 	{
 		foreach (string i in themeData.Keys)
@@ -110,8 +98,7 @@ public partial class GameManager : Node
 	}
 	public void initAll()
 	{
-		initAnimeData();
-		initThemeData();
+		getDataFromJSON();
 		initThemeList();
 	}
 
@@ -149,4 +136,30 @@ public partial class GameManager : Node
 	{
 		return nbQuestion;
 	}
+
+	public void saveDictionaryToJSON()
+	{
+		        // Convertir les données en JSON
+        string jsonString = JsonSerializer.Serialize(themeData);
+
+        // Écrire le JSON dans un fichier
+        using (FileAccess file = FileAccess.Open("res://ressources/saves/themeData.json", FileAccess.ModeFlags.Write))
+        {
+            file.StoreString(jsonString);
+        }
+	}
+
+	private void getDataFromJSON()
+	{
+		// Lire le fichier JSON
+        using (FileAccess file = FileAccess.Open("res://ressources/saves/themeData.json", FileAccess.ModeFlags.Read))
+        {
+            if (file != null)
+            {
+                string jsonString = file.GetAsText();
+                themeData = JsonSerializer.Deserialize<Dictionary<string, List<string[]>>>(jsonString);
+            }
+        }
+	}
+
 }

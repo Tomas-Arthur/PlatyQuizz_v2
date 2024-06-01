@@ -4,13 +4,15 @@
 [ext_resource type="Texture2D" uid="uid://5wg8gpdrrkd" path="res://ressources/fond.png" id="1_xrgn8"]
 [ext_resource type="AudioStream" uid="uid://b5vn17fniqat7" path="res://ressources/One Piece - Binks Sake (Japanese Version).mp3" id="3_li72u"]
 
-[node name="Settings" type="Node2D" node_paths=PackedStringArray("fileDialogRessources", "reponse", "ressource", "cible", "fileDialogCible", "audioStreamPlayer", "volumeBar")]
+[node name="Settings" type="Node2D" node_paths=PackedStringArray("fileDialogRessources", "reponse", "ressource", "cible", "fileDialogCible", "answerText", "suggestionItemList", "audioStreamPlayer", "volumeBar")]
 script = ExtResource("1_pc64y")
 fileDialogRessources = NodePath("FileDRessouces")
 reponse = NodePath("reponse")
 ressource = NodePath("ressources")
-cible = NodePath("DirCible")
+cible = NodePath("")
 fileDialogCible = NodePath("FileDEmplacement")
+answerText = NodePath("Theme")
+suggestionItemList = NodePath("ItemList")
 audioStreamPlayer = NodePath("Label2/AudioStreamPlayer")
 volumeBar = NodePath("Label2/VolumeBar")
 
@@ -38,10 +40,10 @@ offset_bottom = 606.0
 text = "Choisir Morceau"
 
 [node name="AddButton" type="Button" parent="."]
-offset_left = 246.0
-offset_top = 563.0
-offset_right = 384.0
-offset_bottom = 605.0
+offset_left = 441.0
+offset_top = 571.0
+offset_right = 579.0
+offset_bottom = 613.0
 text = "Ajouter"
 
 [node name="AddButton2" type="Button" parent="."]
@@ -76,6 +78,7 @@ text = "Parametre son"
 stream = ExtResource("3_li72u")
 
 [node name="VolumeBar" type="HSlider" parent="Label2"]
+layout_mode = 0
 offset_left = -9.0
 offset_top = 75.0
 offset_right = 236.0
@@ -106,20 +109,34 @@ ok_button_text = "Sélectionner le dossier courant"
 file_mode = 2
 access = 2
 
-[node name="DirCible" type="TextEdit" parent="."]
-offset_left = 61.0
-offset_top = 332.0
-offset_right = 281.0
-offset_bottom = 371.0
-placeholder_text = "Emplacement cible"
-editable = false
+[node name="BTN_cible2" type="Button" parent="."]
+offset_left = 12.0
+offset_top = 6.0
+offset_right = 130.0
+offset_bottom = 49.0
+text = "retour menu"
 
-[node name="BTN_cible" type="Button" parent="."]
-offset_left = 62.0
-offset_top = 380.0
+[node name="Theme" type="TextEdit" parent="."]
+offset_left = 63.0
+offset_top = 318.0
+offset_right = 313.0
+offset_bottom = 373.0
+placeholder_text = "entrez le theme corespondant"
+
+[node name="ItemList" type="ItemList" parent="."]
+visible = false
+offset_left = 64.0
+offset_top = 373.0
 offset_right = 283.0
-offset_bottom = 423.0
-text = "Choisir l'emplacement cible"
+offset_bottom = 418.0
+
+[node name="AddButton4" type="Button" parent="."]
+offset_left = 336.0
+offset_top = 307.0
+offset_right = 432.0
+offset_bottom = 376.0
+text = "Ajouter un
+theme"
 
 [connection signal="file_selected" from="FileDRessouces" to="." method="onFileSelected"]
 [connection signal="pressed" from="BTN_File" to="." method="_on_test_otest_button_pressed"]
@@ -128,4 +145,6 @@ text = "Choisir l'emplacement cible"
 [connection signal="pressed" from="AddButton3" to="." method="_on_Pressed_To_Stop_Test"]
 [connection signal="value_changed" from="Label2/VolumeBar" to="." method="_on_volume_bar_value_changed"]
 [connection signal="dir_selected" from="FileDEmplacement" to="." method="_on_file_d_emplacement_dir_selected"]
-[connection signal="pressed" from="BTN_cible" to="." method="_on_btn_cible_pressed"]
+[connection signal="pressed" from="BTN_cible2" to="." method="_on_btn_pressed_retour"]
+[connection signal="text_changed" from="Theme" to="." method="_on_answer_text_changed"]
+[connection signal="pressed" from="AddButton4" to="." method="on_pressed_add_theme"]

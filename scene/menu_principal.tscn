@@ -52,7 +52,6 @@ offset_left = 1062.0
 offset_top = 559.0
 offset_right = 1146.0
 offset_bottom = 637.0
-disabled = true
 icon = ExtResource("3_e0ocs")
 expand_icon = true
 

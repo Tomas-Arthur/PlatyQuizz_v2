@@ -3,9 +3,13 @@ using System;
 
 public partial class changementScene : Node
 {
+
+	private GameManager instanceGM;
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		instanceGM = GameManager.getInstance();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -16,7 +20,7 @@ public partial class changementScene : Node
 
 	private void _on_play_button_pressed()
 	{
-		GD.Print("changement de scene ");
+		
 		Node simultaneousScene = ResourceLoader.Load<PackedScene>("res://scene/themeChoice.tscn").Instantiate();
 		GetTree().Root.AddChild(simultaneousScene);
 	}
@@ -29,7 +33,7 @@ public partial class changementScene : Node
 
 	private void _on_setting_button_pressed()
 	{
-		GD.Print("changement de scene ");
+		
 		Node simultaneousScene = ResourceLoader.Load<PackedScene>("res://scene/Settings.tscn").Instantiate();
 		GetTree().Root.AddChild(simultaneousScene);
 	}
