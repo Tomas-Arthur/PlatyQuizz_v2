@@ -38,7 +38,9 @@ public partial class GameManager : Node
 	
 	public void addToThemeData(string theme,string[] values)
 	{
-		themeData[theme].Add(values) ;
+ 		List<string[]> themeValue = themeData[theme];
+   		themeValue.add(values)
+		themeData[theme] = themeValue ;
 	}
 
 	public void initThemeList()
