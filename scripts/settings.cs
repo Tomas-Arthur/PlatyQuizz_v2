@@ -44,6 +44,7 @@ public partial class settings : Node
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		
 	}
 
 	private void _on_test_otest_button_pressed()
@@ -61,9 +62,16 @@ public partial class settings : Node
 		if(reponse.Text != null & ressource.Text != null & themeText.Text != null)
 		{
 			GD.Print("copy de : "+ressource.Text+" vers : "+themeText.Text+ " avec comme reponse au quizz : "+reponse.Text);
+			
 			string destinationFile = Path.Combine(themeText.Text,Path.GetFileName(ressource.Text));
-			//GD.Print(""+destinationFile+"");
-			File.Copy(ressource.Text, destinationFile);
+			string [] values = new string[2];
+			values[0] = reponse.Text;
+			values[1] = Path.GetFileName(ressource.Text);
+			on_pressed_add_theme();
+			instanceGM.addToThemeData(themeText.Text,values);
+
+			GD.Print(""+destinationFile+"");
+			File.Copy(ressource.Text, "../PlatyQuizz_v2/ressources/audio/"+destinationFile);
 		}
 	}
 
@@ -99,6 +107,7 @@ public partial class settings : Node
 
 	private void _on_btn_pressed_retour()
 	{
+
 		Node simultaneousScene = ResourceLoader.Load<PackedScene>("res://scene/menu_principal.tscn").Instantiate();
 		GetTree().Root.AddChild(simultaneousScene);
 	}
@@ -107,9 +116,12 @@ public partial class settings : Node
 	{
 		if(themeText.Text != "")
 		{
-			if (!Directory.Exists("res://ressources/audio/"+themeText.Text))
+			string nomDossier = themeText.Text;
+			if (!Directory.Exists("../PlatyQuizz_v2/ressources/audio/"+nomDossier))
 			{
-				Directory.CreateDirectory("res://ressources/audio/"+themeText.Text);
+				GD.Print("on creer le dossier : "+nomDossier);
+				Directory.CreateDirectory("../PlatyQuizz_v2/ressources/audio/"+nomDossier);
+
 			}
 		}
 	}
@@ -117,23 +129,38 @@ public partial class settings : Node
 	private void _on_answer_text_changed()
 	{
 		 // Effacez les anciennes suggestions
-        suggestionItemList.Clear();
+		suggestionItemList.Clear();
 		if( themeText.Text.Length > 0 )
 		suggestionItemList.Visible = true;
 		else
 		suggestionItemList.Visible = false;
-        // Obtenez le texte actuel dans le TextEdit
-        string currentText = themeText.Text.ToLower();
+		// Obtenez le texte actuel dans le TextEdit
+		string currentText = themeText.Text.ToLower();
 
-        // Affichez les suggestions qui correspondent au texte actuel
-        for (int i = 0;i< listTheme.Count;i++)
+		// Affichez les suggestions qui correspondent au texte actuel
+		for (int i = 0;i< listTheme.Count;i++)
 		 {
 			
 
-            if (listTheme[i].ToLower().Contains(currentText))
-            {
-                suggestionItemList.AddItem(listTheme[i]);
-            }
-        }
+			if (listTheme[i].ToLower().Contains(currentText))
+			{
+				suggestionItemList.AddItem(listTheme[i]);
+			}
+		}
+		if(suggestionItemList.ItemCount == 0)
+		{
+			suggestionItemList.Visible = false;
+		}
 	}
+	private void OnSuggestionSelected(int index)
+	{
+		// Récupérez la suggestion sélectionnée dans l'ItemList
+		string selectedSuggestion = suggestionItemList.GetItemText(index);
+
+		// Remplacez le texte du TextEdit par la suggestion sélectionnée
+		themeText.Text = selectedSuggestion;
+		suggestionItemList.Visible = false;
+	}
+
+	
 }

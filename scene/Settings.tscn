@@ -4,23 +4,22 @@
 [ext_resource type="Texture2D" uid="uid://5wg8gpdrrkd" path="res://ressources/fond.png" id="1_xrgn8"]
 [ext_resource type="AudioStream" uid="uid://b5vn17fniqat7" path="res://ressources/One Piece - Binks Sake (Japanese Version).mp3" id="3_li72u"]
 
-[node name="Settings" type="Node2D" node_paths=PackedStringArray("fileDialogRessources", "reponse", "ressource", "cible", "fileDialogCible", "answerText", "suggestionItemList", "audioStreamPlayer", "volumeBar")]
+[node name="Settings" type="Node2D" node_paths=PackedStringArray("fileDialogRessources", "reponse", "ressource", "fileDialogCible", "themeText", "suggestionItemList", "audioStreamPlayer", "volumeBar")]
 script = ExtResource("1_pc64y")
 fileDialogRessources = NodePath("FileDRessouces")
 reponse = NodePath("reponse")
 ressource = NodePath("ressources")
-cible = NodePath("")
 fileDialogCible = NodePath("FileDEmplacement")
-answerText = NodePath("Theme")
+themeText = NodePath("Theme")
 suggestionItemList = NodePath("ItemList")
 audioStreamPlayer = NodePath("Label2/AudioStreamPlayer")
 volumeBar = NodePath("Label2/VolumeBar")
 
 [node name="FileDRessouces" type="FileDialog" parent="."]
-mode = 2
 title = "Open a File"
 position = Vector2i(260, 185)
 size = Vector2i(442, 377)
+mode = 2
 ok_button_text = "Ouvrir"
 file_mode = 0
 access = 2
@@ -147,4 +146,5 @@ theme"
 [connection signal="dir_selected" from="FileDEmplacement" to="." method="_on_file_d_emplacement_dir_selected"]
 [connection signal="pressed" from="BTN_cible2" to="." method="_on_btn_pressed_retour"]
 [connection signal="text_changed" from="Theme" to="." method="_on_answer_text_changed"]
+[connection signal="item_selected" from="ItemList" to="." method="OnSuggestionSelected"]
 [connection signal="pressed" from="AddButton4" to="." method="on_pressed_add_theme"]

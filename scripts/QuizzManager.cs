@@ -134,38 +134,38 @@ public partial class QuizzManager : Node
 	}
 
 private void OnTextChanged()
-    {
-        // Effacez les anciennes suggestions
-        suggestionItemList.Clear();
+	{
+		// Effacez les anciennes suggestions
+		suggestionItemList.Clear();
 		if( answerText.Text.Length > 0 )
 		suggestionItemList.Visible = true;
 		else
 		suggestionItemList.Visible = false;
-        // Obtenez le texte actuel dans le TextEdit
-        string currentText = answerText.Text.ToLower();
+		// Obtenez le texte actuel dans le TextEdit
+		string currentText = answerText.Text.ToLower();
 
-        // Affichez les suggestions qui correspondent au texte actuel
-        for (int i = 0;i< listChoosen.Count;i++)
+		// Affichez les suggestions qui correspondent au texte actuel
+		for (int i = 0;i< listChoosen.Count;i++)
 		 {
 			
 
-            if (listChoosen[i][0].ToLower().Contains(currentText))
-            {
-                suggestionItemList.AddItem(listChoosen[i][0]);
-            }
-        }
+			if (listChoosen[i][0].ToLower().Contains(currentText))
+			{
+				suggestionItemList.AddItem(listChoosen[i][0]);
+			}
+		}
 
-    }
+	}
 
-    private void OnSuggestionSelected(int index)
-    {
-        // Récupérez la suggestion sélectionnée dans l'ItemList
-        string selectedSuggestion = suggestionItemList.GetItemText(index);
+	private void OnSuggestionSelected(int index)
+	{
+		// Récupérez la suggestion sélectionnée dans l'ItemList
+		string selectedSuggestion = suggestionItemList.GetItemText(index);
 
-        // Remplacez le texte du TextEdit par la suggestion sélectionnée
-        answerText.Text = selectedSuggestion;
+		// Remplacez le texte du TextEdit par la suggestion sélectionnée
+		answerText.Text = selectedSuggestion;
 
-    }
+	}
 
 
 	private void _on_valid_button_pressed()

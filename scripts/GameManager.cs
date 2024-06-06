@@ -28,7 +28,7 @@ public partial class GameManager : Node
 		}
 		return instance;
 	}
-    
+	
 	public List<string[]> getAnimeData()
 	{
 		return animeData;
@@ -38,8 +38,15 @@ public partial class GameManager : Node
 	
 	public void addToThemeData(string theme,string[] values)
 	{
- 		List<string[]> themeValue = themeData[theme];
-   		themeValue.add(values)
+		List<string[]> themeValue = new List<string[]>();
+		if( !themeData.ContainsKey(theme))
+		{
+			
+			themeValue.Add(values);
+			themeData.Add(theme,themeValue);
+		}
+ 		themeValue = themeData[theme];
+   		themeValue.Add(values);
 		themeData[theme] = themeValue ;
 	}
 
@@ -65,7 +72,7 @@ public partial class GameManager : Node
 		if(!questionPulled.Contains( listChoosen[value][0]))
 		{
 			answer[0]=listChoosen[value][0];
-			answer[1]="res://ressources/audio/"+themeChosen+"/"+listChoosen[value][1];
+			answer[1]="../PlatyQuizz_v2/ressources/audio/"+themeChosen+"/"+listChoosen[value][1];
 			//GD.Print("valeur de answer : "+answer[0]+" "+answer[1]);
 			questionPulled.Add(answer[0]);
 			nbQuestion ++;
@@ -141,27 +148,33 @@ public partial class GameManager : Node
 
 	public void saveDictionaryToJSON()
 	{
-		        // Convertir les données en JSON
-        string jsonString = JsonSerializer.Serialize(themeData);
+				// Convertir les données en JSON
+		string jsonString = JsonSerializer.Serialize(themeData);
 
-        // Écrire le JSON dans un fichier
-        using (FileAccess file = FileAccess.Open("res://ressources/saves/themeData.json", FileAccess.ModeFlags.Write))
-        {
-            file.StoreString(jsonString);
-        }
+		// Écrire le JSON dans un fichier
+		using (FileAccess file = FileAccess.Open("res://ressources/saves/themeData.json", FileAccess.ModeFlags.Write))
+		{
+			file.StoreString(jsonString);
+		}
 	}
 
 	private void getDataFromJSON()
 	{
 		// Lire le fichier JSON
-        using (FileAccess file = FileAccess.Open("res://ressources/saves/themeData.json", FileAccess.ModeFlags.Read))
-        {
-            if (file != null)
-            {
-                string jsonString = file.GetAsText();
-                themeData = JsonSerializer.Deserialize<Dictionary<string, List<string[]>>>(jsonString);
-            }
-        }
+		using (FileAccess file = FileAccess.Open("res://ressources/saves/themeData.json", FileAccess.ModeFlags.Read))
+		{
+			if (file != null)
+			{
+				string jsonString = file.GetAsText();
+				themeData = JsonSerializer.Deserialize<Dictionary<string, List<string[]>>>(jsonString);
+			}
+		}
+	}
+
+	public void reloadThemeData()
+	{
+		saveDictionaryToJSON();
+		getDataFromJSON();
 	}
 
 }
