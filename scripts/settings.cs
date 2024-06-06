@@ -72,6 +72,9 @@ public partial class settings : Node
 
 			GD.Print(""+destinationFile+"");
 			File.Copy(ressource.Text, "../PlatyQuizz_v2/ressources/audio/"+destinationFile);
+
+			instanceGM.reloadThemeData();
+			//GetTree().ReloadCurrentScene();
 		}
 	}
 
@@ -107,7 +110,8 @@ public partial class settings : Node
 
 	private void _on_btn_pressed_retour()
 	{
-
+		instanceGM.reloadThemeData();
+		instanceGM.saveVolume( audioStreamPlayer.VolumeDb);
 		Node simultaneousScene = ResourceLoader.Load<PackedScene>("res://scene/menu_principal.tscn").Instantiate();
 		GetTree().Root.AddChild(simultaneousScene);
 	}

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://d0pi3h2iqu4t"
+path="res://.godot/imported/03 - again (TV Size) (YUI) ~ FMA Brotherhood (OST I) - [ZR].mp3-c12a172e3da03007478d67cee7d0f0b7.mp3str"
+
+[deps]
+
+source_file="res://ressources/audio/jeux video/03 - again (TV Size) (YUI) ~ FMA Brotherhood (OST I) - [ZR].mp3"
+dest_files=["res://.godot/imported/03 - again (TV Size) (YUI) ~ FMA Brotherhood (OST I) - [ZR].mp3-c12a172e3da03007478d67cee7d0f0b7.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

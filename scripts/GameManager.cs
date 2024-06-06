@@ -45,9 +45,12 @@ public partial class GameManager : Node
 			themeValue.Add(values);
 			themeData.Add(theme,themeValue);
 		}
- 		themeValue = themeData[theme];
-   		themeValue.Add(values);
-		themeData[theme] = themeValue ;
+		else
+		{
+			themeValue = themeData[theme];
+			themeValue.Add(values);
+			themeData[theme] = themeValue ;
+		}
 	}
 
 	public void initThemeList()
@@ -68,12 +71,12 @@ public partial class GameManager : Node
 		string[] answer = new string[2];
 		Random i = new Random();
 		int value = i.Next(0,listChoosen.Count);
-		//GD.Print("listChoosen["+value+"][0] : "+listChoosen[value][0]);
+		
 		if(!questionPulled.Contains( listChoosen[value][0]))
 		{
 			answer[0]=listChoosen[value][0];
 			answer[1]="../PlatyQuizz_v2/ressources/audio/"+themeChosen+"/"+listChoosen[value][1];
-			//GD.Print("valeur de answer : "+answer[0]+" "+answer[1]);
+			
 			questionPulled.Add(answer[0]);
 			nbQuestion ++;
 			return answer;
@@ -109,6 +112,7 @@ public partial class GameManager : Node
 	{
 		getDataFromJSON();
 		initThemeList();
+		getSettingsFromJSON();
 	}
 
 	public void resetVariables()
@@ -177,4 +181,31 @@ public partial class GameManager : Node
 		getDataFromJSON();
 	}
 
+	public void saveVolume(float volume)
+	{
+		string[] volumeToSave = new string[2];
+		volumeToSave[0] = "volume";
+		volumeToSave[1] = volume.ToString();
+
+		string jsonString = JsonSerializer.Serialize(volumeToSave);
+		using (FileAccess file = FileAccess.Open("res://ressources/saves/settings.json", FileAccess.ModeFlags.Write))
+		{
+			file.StoreString(jsonString);
+		}
+	}
+
+	private void getSettingsFromJSON()
+	{
+		// Lire le fichier JSON
+		using (FileAccess file = FileAccess.Open("res://ressources/saves/settings.json", FileAccess.ModeFlags.Read))
+		{
+			if (file != null)
+			{
+				string jsonString = file.GetAsText();
+				string[] volumeToSave = new string[2];
+				volumeToSave = JsonSerializer.Deserialize<string[]>(jsonString);
+				volume = volumeToSave[1].ToFloat();
+			}
+		}
+	}
 }

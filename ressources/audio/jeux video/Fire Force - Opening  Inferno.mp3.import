@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cye2sugxvj1va"
+path="res://.godot/imported/Fire Force - Opening  Inferno.mp3-64c6d89cffae6512855decbd77a16c13.mp3str"
+
+[deps]
+
+source_file="res://ressources/audio/jeux video/Fire Force - Opening  Inferno.mp3"
+dest_files=["res://.godot/imported/Fire Force - Opening  Inferno.mp3-64c6d89cffae6512855decbd77a16c13.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
