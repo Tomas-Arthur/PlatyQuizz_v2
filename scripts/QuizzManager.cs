@@ -154,6 +154,10 @@ private void OnTextChanged()
 				suggestionItemList.AddItem(listChoosen[i][0]);
 			}
 		}
+		if(suggestionItemList.ItemCount == 0)
+		{
+			suggestionItemList.Visible = false;
+		}
 
 	}
 
@@ -164,6 +168,7 @@ private void OnTextChanged()
 
 		// Remplacez le texte du TextEdit par la suggestion sélectionnée
 		answerText.Text = selectedSuggestion;
+		suggestionItemList.Visible = false;
 
 	}
 
