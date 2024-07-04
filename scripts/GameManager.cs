@@ -52,13 +52,30 @@ public partial class GameManager : Node
 			themeData[theme] = themeValue ;
 		}
 	}
+		public void addToThemeData(string theme)
+	{
+		List<string[]> themeValue = new List<string[]>();
+		if( !themeData.ContainsKey(theme))
+		{
+			//themeValue.Add(values);
+			themeData.Add(theme,themeValue);
+			
+		}
+	}
 
 	public void initThemeList()
 	{
+		themeList.Clear();
 		foreach (string i in themeData.Keys)
 		{
 			themeList.Add(i);
 		}
+	}
+
+	public int getNombreQuestion(string theme)
+	{
+
+		return themeData[theme].Count;
 	}
 
 	public List<string> getThemeList()
@@ -75,8 +92,8 @@ public partial class GameManager : Node
 		if(!questionPulled.Contains( listChoosen[value][0]))
 		{
 			answer[0]=listChoosen[value][0];
-			answer[1]="../PlatyQuizz_v2/ressources/audio/"+themeChosen+"/"+listChoosen[value][1];
-			
+			answer[1]=System.Environment.CurrentDirectory+"/ressources/audio/"+themeChosen+"/"+listChoosen[value][1];
+			//res://ressources/audio/anime/03 - again (TV Size) (YUI) ~ FMA Brotherhood (OST I) - [ZR].mp3
 			questionPulled.Add(answer[0]);
 			nbQuestion ++;
 			return answer;
@@ -156,7 +173,7 @@ public partial class GameManager : Node
 		string jsonString = JsonSerializer.Serialize(themeData);
 
 		// Écrire le JSON dans un fichier
-		using (FileAccess file = FileAccess.Open("res://ressources/saves/themeData.json", FileAccess.ModeFlags.Write))
+		using (FileAccess file = FileAccess.Open(System.Environment.CurrentDirectory+"/ressources/saves/themeData.json", FileAccess.ModeFlags.Write))
 		{
 			file.StoreString(jsonString);
 		}
@@ -165,7 +182,7 @@ public partial class GameManager : Node
 	private void getDataFromJSON()
 	{
 		// Lire le fichier JSON
-		using (FileAccess file = FileAccess.Open("res://ressources/saves/themeData.json", FileAccess.ModeFlags.Read))
+		using (FileAccess file = FileAccess.Open(System.Environment.CurrentDirectory+"/ressources/saves/themeData.json", FileAccess.ModeFlags.Read))
 		{
 			if (file != null)
 			{
@@ -173,12 +190,17 @@ public partial class GameManager : Node
 				themeData = JsonSerializer.Deserialize<Dictionary<string, List<string[]>>>(jsonString);
 			}
 		}
+		foreach (var item in themeData)
+		{
+			//GD.Print(item);
+		}
 	}
 
 	public void reloadThemeData()
 	{
 		saveDictionaryToJSON();
 		getDataFromJSON();
+		initThemeList();
 	}
 
 	public void saveVolume(float volume)
@@ -188,7 +210,7 @@ public partial class GameManager : Node
 		volumeToSave[1] = volume.ToString();
 
 		string jsonString = JsonSerializer.Serialize(volumeToSave);
-		using (FileAccess file = FileAccess.Open("res://ressources/saves/settings.json", FileAccess.ModeFlags.Write))
+		using (FileAccess file = FileAccess.Open(System.Environment.CurrentDirectory+"/ressources/saves/settings.json", FileAccess.ModeFlags.Write))
 		{
 			file.StoreString(jsonString);
 		}
@@ -197,7 +219,7 @@ public partial class GameManager : Node
 	private void getSettingsFromJSON()
 	{
 		// Lire le fichier JSON
-		using (FileAccess file = FileAccess.Open("res://ressources/saves/settings.json", FileAccess.ModeFlags.Read))
+		using (FileAccess file = FileAccess.Open(System.Environment.CurrentDirectory+"/ressources/saves/settings.json", FileAccess.ModeFlags.Read))
 		{
 			if (file != null)
 			{

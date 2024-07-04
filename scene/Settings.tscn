@@ -4,8 +4,11 @@
 [ext_resource type="Texture2D" uid="uid://5wg8gpdrrkd" path="res://ressources/fond.png" id="1_xrgn8"]
 [ext_resource type="AudioStream" uid="uid://b5vn17fniqat7" path="res://ressources/One Piece - Binks Sake (Japanese Version).mp3" id="3_li72u"]
 
-[node name="Settings" type="Node2D" node_paths=PackedStringArray("fileDialogRessources", "reponse", "ressource", "fileDialogCible", "themeText", "suggestionItemList", "audioStreamPlayer", "volumeBar")]
+[node name="Settings" type="Node2D" node_paths=PackedStringArray("popupPanel", "popupLabel", "timer", "fileDialogRessources", "reponse", "ressource", "fileDialogCible", "themeText", "suggestionItemList", "audioStreamPlayer", "volumeBar")]
 script = ExtResource("1_pc64y")
+popupPanel = NodePath("PopupPanel")
+popupLabel = NodePath("PopupPanel/labelPopUp")
+timer = NodePath("Timer")
 fileDialogRessources = NodePath("FileDRessouces")
 reponse = NodePath("reponse")
 ressource = NodePath("ressources")
@@ -16,19 +19,20 @@ audioStreamPlayer = NodePath("Label2/AudioStreamPlayer")
 volumeBar = NodePath("Label2/VolumeBar")
 
 [node name="FileDRessouces" type="FileDialog" parent="."]
+mode = 2
 title = "Open a File"
 position = Vector2i(260, 185)
 size = Vector2i(442, 377)
-mode = 2
 ok_button_text = "Ouvrir"
 file_mode = 0
 access = 2
+filters = PackedStringArray("*.MP3", "*.mp3")
 
 [node name="CanvasGroup" type="CanvasGroup" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="CanvasGroup"]
 position = Vector2(584.5, 325)
-scale = Vector2(2.26078, 0.84183)
+scale = Vector2(50, 50)
 texture = ExtResource("1_xrgn8")
 
 [node name="BTN_File" type="Button" parent="."]
@@ -37,6 +41,42 @@ offset_top = 558.0
 offset_right = 221.0
 offset_bottom = 606.0
 text = "Choisir Morceau"
+
+[node name="CreationOrder 1" type="Label" parent="."]
+offset_left = 18.0
+offset_top = 324.0
+offset_right = 44.0
+offset_bottom = 362.0
+theme_override_font_sizes/font_size = 25
+text = "1"
+horizontal_alignment = 1
+
+[node name="CreationOrder 2" type="Label" parent="."]
+offset_left = 21.0
+offset_top = 438.0
+offset_right = 52.0
+offset_bottom = 476.0
+theme_override_font_sizes/font_size = 25
+text = "2"
+horizontal_alignment = 1
+
+[node name="CreationOrder 3" type="Label" parent="."]
+offset_left = 19.0
+offset_top = 561.0
+offset_right = 50.0
+offset_bottom = 599.0
+theme_override_font_sizes/font_size = 25
+text = "3"
+horizontal_alignment = 1
+
+[node name="CreationOrder 4" type="Label" parent="."]
+offset_left = 402.0
+offset_top = 571.0
+offset_right = 433.0
+offset_bottom = 609.0
+theme_override_font_sizes/font_size = 25
+text = "4"
+horizontal_alignment = 1
 
 [node name="AddButton" type="Button" parent="."]
 offset_left = 441.0
@@ -101,12 +141,13 @@ placeholder_text = "Emplacement morceau"
 editable = false
 
 [node name="FileDEmplacement" type="FileDialog" parent="."]
-title = "Open a Directory"
+title = "Open a File"
 position = Vector2i(260, 185)
 size = Vector2i(442, 377)
-ok_button_text = "Sélectionner le dossier courant"
-file_mode = 2
+ok_button_text = "Ouvrir"
+file_mode = 0
 access = 2
+filters = PackedStringArray("*.mp3", "*.MP3")
 
 [node name="BTN_cible2" type="Button" parent="."]
 offset_left = 12.0
@@ -137,6 +178,22 @@ offset_bottom = 376.0
 text = "Ajouter un
 theme"
 
+[node name="PopupPanel" type="PopupPanel" parent="."]
+position = Vector2i(445, 390)
+size = Vector2i(200, 100)
+
+[node name="labelPopUp" type="Label" parent="PopupPanel"]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 196.0
+offset_bottom = 96.0
+text = "fesefefefefefefefef"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+
 [connection signal="file_selected" from="FileDRessouces" to="." method="onFileSelected"]
 [connection signal="pressed" from="BTN_File" to="." method="_on_test_otest_button_pressed"]
 [connection signal="pressed" from="AddButton" to="." method="_on_add_button_pressed"]
@@ -148,3 +205,4 @@ theme"
 [connection signal="text_changed" from="Theme" to="." method="_on_answer_text_changed"]
 [connection signal="item_selected" from="ItemList" to="." method="OnSuggestionSelected"]
 [connection signal="pressed" from="AddButton4" to="." method="on_pressed_add_theme"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

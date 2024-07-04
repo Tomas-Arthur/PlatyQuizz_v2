@@ -23,15 +23,24 @@ public partial class initThemeChoiceList : Node
 		instanceGM = GameManager.getInstance();
 		//instanceGM.initAll();
 		listTheme = instanceGM.getThemeList();
-		GD.Print("nombre de themes : "+listTheme.Count);
+		
+
+		
 		for (int i = 0; i <	listTheme.Count;i++)
 		{
 			GD.Print("nouveau bouton : "+listTheme[i]);
 			 var myButton = new Button();
     		myButton.Text = listTheme[i];
     		vBoxContainer.AddChild(myButton);
+			if(instanceGM.getNombreQuestion(listTheme[i]) > 0)
+			{
+				myButton.Pressed += () => button_Click(myButton.Text);
+			}
+			else
+			{
+				myButton.Disabled = true;
+			}
 			
-			myButton.Pressed += () => button_Click(myButton.Text);
 		}
 
 	}

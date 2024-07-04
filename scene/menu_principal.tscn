@@ -11,7 +11,7 @@ script = ExtResource("1_evd4b")
 
 [node name="Sprite2D" type="Sprite2D" parent="CanvasGroup"]
 position = Vector2(584.5, 325)
-scale = Vector2(2.26078, 0.84183)
+scale = Vector2(50, 18.62)
 texture = ExtResource("1_pagq2")
 
 [node name="PlayButton" type="Button" parent="CanvasGroup"]

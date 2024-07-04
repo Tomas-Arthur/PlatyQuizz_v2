@@ -11,7 +11,7 @@ valeurScore = NodePath("CanvasGroup/valeurScore")
 
 [node name="Sprite2D" type="Sprite2D" parent="CanvasGroup"]
 position = Vector2(586.5, 354)
-scale = Vector2(2.53529, 1)
+scale = Vector2(50, 19.724)
 texture = ExtResource("2_bah8b")
 
 [node name="Titre" type="Label" parent="CanvasGroup"]

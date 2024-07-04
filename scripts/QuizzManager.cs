@@ -63,7 +63,11 @@ public partial class QuizzManager : Node
 			return;
 		}
 		scoreActuel.Text = "Score : "+instanceGM.getScore()+" / "+instanceGM.getNbQuestion();
-		audioStreamPlayer.Stream = (AudioStream)ResourceLoader.Load(questionActuel[1]);
+
+		using var file = Godot.FileAccess.Open(questionActuel[1], Godot.FileAccess.ModeFlags.Read);
+		var sound = new AudioStreamMP3();
+		sound.Data = file.GetBuffer((long)file.GetLength());
+		audioStreamPlayer.Stream = sound;
 		listChoosen = instanceGM.getListChoosen();
 		 
 		 for (int i = 0;i< listChoosen.Count;i++)
@@ -79,7 +83,7 @@ public partial class QuizzManager : Node
 	{
 		progressBarUpdate();
 	}
-
+	
 
 	private void _on_play_button_pressed()
 	{
@@ -213,6 +217,7 @@ private void OnTextChanged()
 
 	private void _on_btn_pressed_retour()
 	{
+		audioStreamPlayer.Stop();
 		Node simultaneousScene = ResourceLoader.Load<PackedScene>("res://scene/menu_principal.tscn").Instantiate();
 		GetTree().Root.AddChild(simultaneousScene);
 	}

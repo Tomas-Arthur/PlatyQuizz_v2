@@ -5,7 +5,17 @@ using System.IO;
 
 public partial class settings : Node
 {
-		public GameManager instanceGM ;
+
+
+	[Export]
+	public PopupPanel popupPanel; 
+
+	[Export]
+	public Label popupLabel;
+
+	[Export]
+	public Timer timer;
+	public GameManager instanceGM ;
 	[Export]
 	public FileDialog fileDialogRessources;
 	[Export]
@@ -59,22 +69,54 @@ public partial class settings : Node
 
 	private void _on_add_button_pressed()
 	{
-		if(reponse.Text != null & ressource.Text != null & themeText.Text != null)
+		if(reponse.Text != "" & ressource.Text != "" & themeText.Text != "")
 		{
-			GD.Print("copy de : "+ressource.Text+" vers : "+themeText.Text+ " avec comme reponse au quizz : "+reponse.Text);
+			//GD.Print("copy de : "+ressource.Text+" vers : "+themeText.Text+ " avec comme reponse au quizz : "+reponse.Text);
 			
 			string destinationFile = Path.Combine(themeText.Text,Path.GetFileName(ressource.Text));
 			string [] values = new string[2];
 			values[0] = reponse.Text;
 			values[1] = Path.GetFileName(ressource.Text);
-			on_pressed_add_theme();
-			instanceGM.addToThemeData(themeText.Text,values);
+			
 
-			GD.Print(""+destinationFile+"");
-			File.Copy(ressource.Text, "../PlatyQuizz_v2/ressources/audio/"+destinationFile);
+			//GD.Print("destination file : "+System.Environment.CurrentDirectory+"/ressources/audio/"+destinationFile+"");
+			//string currentDirectory = System.Environment.CurrentDirectory;
+       		//GD.Print($"Le répertoire de travail actuel est : {currentDirectory}");
+			if(!File.Exists(System.Environment.CurrentDirectory+"/ressources/audio/"+destinationFile))
+			{
+				on_pressed_add_theme();
+				instanceGM.addToThemeData(themeText.Text,values);
+				File.Copy(ressource.Text, System.Environment.CurrentDirectory+"/ressources/audio/"+destinationFile);
+				popupLabel.Text = "Le fichier a été ajouté avec succès";
+				popupPanel.Show();
+
+				timer.Start();
+				ressource.Text = "";
+				reponse.Text = "";
+				themeText.Text = "";
+			}
+			else
+			{
+				popupLabel.Text = "Le fichier existe deja";
+				popupPanel.Show();
+			
+				timer.Start();
+				ressource.Text = "";
+				reponse.Text = "";
+				themeText.Text = "";
+			}
 
 			instanceGM.reloadThemeData();
-			//GetTree().ReloadCurrentScene();
+		}
+		else
+		{
+			popupLabel.Text = "il manque des informations pour deplacer le fichier";
+				popupPanel.Show();
+			
+				timer.Start();
+				ressource.Text = "";
+				reponse.Text = "";
+				themeText.Text = "";
 		}
 	}
 
@@ -112,6 +154,7 @@ public partial class settings : Node
 	{
 		instanceGM.reloadThemeData();
 		instanceGM.saveVolume( audioStreamPlayer.VolumeDb);
+		audioStreamPlayer.Stop();
 		Node simultaneousScene = ResourceLoader.Load<PackedScene>("res://scene/menu_principal.tscn").Instantiate();
 		GetTree().Root.AddChild(simultaneousScene);
 	}
@@ -121,11 +164,23 @@ public partial class settings : Node
 		if(themeText.Text != "")
 		{
 			string nomDossier = themeText.Text;
-			if (!Directory.Exists("../PlatyQuizz_v2/ressources/audio/"+nomDossier))
-			{
+			if (!Directory.Exists(System.Environment.CurrentDirectory+"/ressources/audio/"+nomDossier))
+			{ 
 				GD.Print("on creer le dossier : "+nomDossier);
-				Directory.CreateDirectory("../PlatyQuizz_v2/ressources/audio/"+nomDossier);
-
+				Directory.CreateDirectory(System.Environment.CurrentDirectory+"/ressources/audio/"+nomDossier);
+				instanceGM.addToThemeData(nomDossier);
+				instanceGM.reloadThemeData();
+				popupLabel.Text = "Le dossier a été ajouté avec succès";
+				popupPanel.Show();
+			
+				timer.Start();
+			}
+			else
+			{
+				popupLabel.Text = "Le dossier existe déjà";
+				popupPanel.Show();
+			
+				timer.Start();
 			}
 		}
 	}
@@ -166,5 +221,10 @@ public partial class settings : Node
 		suggestionItemList.Visible = false;
 	}
 
+	public void _on_timer_timeout()
+	{
+		timer.Stop();
+		popupPanel.Hide();
+	}
 	
 }

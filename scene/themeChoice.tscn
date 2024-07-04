@@ -11,7 +11,7 @@ vBoxContainer = NodePath("CanvasGroup/ScrollContainer/VBoxContainer")
 
 [node name="Sprite2D" type="Sprite2D" parent="CanvasGroup"]
 position = Vector2(579, 324.25)
-scale = Vector2(2.26275, 0.841176)
+scale = Vector2(50, 18.582)
 texture = ExtResource("1_nr74w")
 
 [node name="Label" type="Label" parent="CanvasGroup"]
@@ -45,6 +45,7 @@ offset_bottom = 638.0
 text = "retour menu"
 
 [node name="BTN_cible3" type="Button" parent="."]
+visible = false
 offset_left = 153.0
 offset_top = 595.0
 offset_right = 271.0

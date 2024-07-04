@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/QuizzManager.cs" id="1_ksm1k"]
 [ext_resource type="Texture2D" uid="uid://5wg8gpdrrkd" path="res://ressources/fond.png" id="1_tdwux"]
-[ext_resource type="AudioStream" uid="uid://cuqdxnus8o442" path="res://ressources/audio/anime/Solo Leveling - Opening  Level.mp3" id="3_gkl11"]
+[ext_resource type="AudioStream" uid="uid://bynkw3na35qqb" path="res://ressources/audio/anime/Solo Leveling - Opening  Level.mp3" id="3_gkl11"]
 
 [node name="quizz" type="Node2D" node_paths=PackedStringArray("scoreActuel", "timer", "popupPanel", "popupLabel", "answerText", "suggestionItemList", "progressBar", "volumeBar", "playButton", "pauseButton", "stopButton", "audioStreamPlayer")]
 script = ExtResource("1_ksm1k")
@@ -23,7 +23,7 @@ audioStreamPlayer = NodePath("CanvasGroup/AudioStreamPlayer")
 
 [node name="Sprite2D" type="Sprite2D" parent="CanvasGroup"]
 position = Vector2(575.5, 369)
-scale = Vector2(2.33137, 1)
+scale = Vector2(50, 21.45)
 texture = ExtResource("1_tdwux")
 
 [node name="Label" type="Label" parent="CanvasGroup"]
