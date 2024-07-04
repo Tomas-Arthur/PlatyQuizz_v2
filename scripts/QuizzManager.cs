@@ -44,6 +44,9 @@ public partial class QuizzManager : Node
 	public GameManager instanceGM ;
 	private List<string[]> listChoosen;
 	private string[] questionActuel ;
+
+	private int nbQuestionMax;
+	private int nbQuestion;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -51,18 +54,19 @@ public partial class QuizzManager : Node
 		playButton.Disabled = false;
 		pauseButton.Disabled = true;
 		stopButton.Disabled = true;
-
+		//nbQuestion = instanceGM.getNbQuestion();
+		nbQuestionMax = instanceGM.getNbQuestionMax();
 		audioStreamPlayer.VolumeDb = instanceGM.getVolume();
 		volumeBar.Value = instanceGM.getVolume();
 
 		questionActuel = instanceGM.getQuestion();
-		if(questionActuel == null)
+		if(questionActuel == null || instanceGM.getNbQuestion() > nbQuestionMax )
 		{
 			Node simultaneousScene = ResourceLoader.Load<PackedScene>("res://scene/endGame.tscn").Instantiate();
 			GetTree().Root.AddChild(simultaneousScene);
 			return;
 		}
-		scoreActuel.Text = "Score : "+instanceGM.getScore()+" / "+instanceGM.getNbQuestion();
+		scoreActuel.Text = "Score : "+instanceGM.getScore()+" / "+nbQuestionMax;
 
 		using var file = Godot.FileAccess.Open(questionActuel[1], Godot.FileAccess.ModeFlags.Read);
 		var sound = new AudioStreamMP3();
@@ -197,6 +201,7 @@ private void OnTextChanged()
 			popupPanel.Show();
 			timer.Start();
 		}
+		instanceGM.incrementNbQuestion();
 	}
 
 	private void _on_button_pop_up_pressed()

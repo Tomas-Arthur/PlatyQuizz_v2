@@ -15,7 +15,7 @@ public partial class endGame : Node
 	{
 		instanceGM = GameManager.getInstance();
 		listChoosen = instanceGM.getListChoosen();
-		valeurScore.Text = instanceGM.getScore().ToString() + " / "+listChoosen.Count;
+		valeurScore.Text = instanceGM.getScore().ToString() + " / "+instanceGM.getNbQuestionMax().ToString();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

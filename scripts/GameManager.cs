@@ -5,7 +5,9 @@ using System.Text.Json;
 public partial class GameManager : Node
 {
 	private static GameManager instance;
-	public int nbQuestion = 0;
+	public int nbQuestion = 1;
+
+	public int nbQuestionMax = 10;
 	List<string[]> animeData = new List<string[]>();
 	List<string[]> listChoosen;
 	private int getQuestionCount =0;
@@ -95,7 +97,7 @@ public partial class GameManager : Node
 			answer[1]=System.Environment.CurrentDirectory+"/ressources/audio/"+themeChosen+"/"+listChoosen[value][1];
 			//res://ressources/audio/anime/03 - again (TV Size) (YUI) ~ FMA Brotherhood (OST I) - [ZR].mp3
 			questionPulled.Add(answer[0]);
-			nbQuestion ++;
+			//nbQuestion ++;
 			return answer;
 		}
 		else
@@ -137,7 +139,7 @@ public partial class GameManager : Node
 		questionPulled.Clear();
 		getQuestionCount =0;
 		score =0;
-		nbQuestion =0;
+		nbQuestion =1;
 	}
 	public List<string[]> getListChoosen()
 	{
@@ -165,6 +167,11 @@ public partial class GameManager : Node
 	public int getNbQuestion()
 	{
 		return nbQuestion;
+	}
+
+	public void incrementNbQuestion()
+	{
+		nbQuestion++;
 	}
 
 	public void saveDictionaryToJSON()
@@ -203,19 +210,24 @@ public partial class GameManager : Node
 		initThemeList();
 	}
 
-	public void saveVolume(float volume)
+	public void saveVolumeAndNbQuestion(float volume,string nbQuestion)
 	{
-		string[] volumeToSave = new string[2];
-		volumeToSave[0] = "volume";
-		volumeToSave[1] = volume.ToString();
-
-		string jsonString = JsonSerializer.Serialize(volumeToSave);
+		string[] volumeAndNbQuestionToSave = new string[4];
+		volumeAndNbQuestionToSave[0] = "volume";
+		volumeAndNbQuestionToSave[1] = volume.ToString();
+		volumeAndNbQuestionToSave[2] = "nbQuestionParQuizz";
+		volumeAndNbQuestionToSave[3] = nbQuestion.ToString();
+		string jsonString = JsonSerializer.Serialize(volumeAndNbQuestionToSave);
 		using (FileAccess file = FileAccess.Open(System.Environment.CurrentDirectory+"/ressources/saves/settings.json", FileAccess.ModeFlags.Write))
 		{
 			file.StoreString(jsonString);
 		}
 	}
 
+	public int getNbQuestionMax()
+	{
+		return nbQuestionMax;
+	}
 	private void getSettingsFromJSON()
 	{
 		// Lire le fichier JSON
@@ -224,10 +236,24 @@ public partial class GameManager : Node
 			if (file != null)
 			{
 				string jsonString = file.GetAsText();
-				string[] volumeToSave = new string[2];
-				volumeToSave = JsonSerializer.Deserialize<string[]>(jsonString);
-				volume = volumeToSave[1].ToFloat();
+				string[] volumeAndNbQuestionMaxToSave = new string[4];
+				volumeAndNbQuestionMaxToSave = JsonSerializer.Deserialize<string[]>(jsonString);
+				volume = volumeAndNbQuestionMaxToSave[1].ToFloat();
+				nbQuestionMax = volumeAndNbQuestionMaxToSave[3].ToInt();
 			}
 		}
 	}
+
+	public void setNbQuestionMax(int nb)
+	{
+		if(nb > 0)
+		{
+			nbQuestionMax = nb;
+		}
+		else
+		{
+			nbQuestionMax = 10;
+		}
+	}
+
 }

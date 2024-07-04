@@ -44,6 +44,8 @@ public partial class settings : Node
 	[Export]
 	public Slider volumeBar;
 	
+	[Export]
+	public TextEdit nbQuestionMax;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -52,6 +54,7 @@ public partial class settings : Node
 		volumeBar.Value = instanceGM.getVolume();
 		audioStreamPlayer.VolumeDb = instanceGM.getVolume();
 		listTheme = instanceGM.getThemeList();
+		nbQuestionMax.Text = instanceGM.getNbQuestionMax().ToString();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -163,7 +166,8 @@ public partial class settings : Node
 	private void _on_btn_pressed_retour()
 	{
 		instanceGM.reloadThemeData();
-		instanceGM.saveVolume( audioStreamPlayer.VolumeDb);
+		instanceGM.setNbQuestionMax(nbQuestionMax.Text.ToInt());
+		instanceGM.saveVolumeAndNbQuestion( audioStreamPlayer.VolumeDb,nbQuestionMax.Text);
 		audioStreamPlayer.Stop();
 		Node simultaneousScene = ResourceLoader.Load<PackedScene>("res://scene/menu_principal.tscn").Instantiate();
 		GetTree().Root.AddChild(simultaneousScene);
