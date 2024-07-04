@@ -22,8 +22,9 @@ public partial class changementScene : Node
 	private void _on_play_button_pressed()
 	{
 		
-		Node simultaneousScene = ResourceLoader.Load<PackedScene>("res://scene/themeChoice.tscn").Instantiate();
-		GetTree().Root.AddChild(simultaneousScene);
+		//Node simultaneousScene = ResourceLoader.Load<PackedScene>("res://scene/themeChoice.tscn").Instantiate();
+		//GetTree().Root.AddChild(simultaneousScene);
+		GetTree().ChangeSceneToFile("res://scene/themeChoice.tscn");
 	}
 
 
@@ -35,7 +36,8 @@ public partial class changementScene : Node
 	private void _on_setting_button_pressed()
 	{
 		
-		Node simultaneousScene = ResourceLoader.Load<PackedScene>("res://scene/Settings.tscn").Instantiate();
-		GetTree().Root.AddChild(simultaneousScene);
+		//Node simultaneousScene = ResourceLoader.Load<PackedScene>("res://scene/Settings.tscn").Instantiate();
+		//GetTree().Root.AddChild(simultaneousScene);
+		GetTree().ChangeSceneToFile("res://scene/Settings.tscn");
 	}
 }

@@ -52,8 +52,9 @@ public partial class initThemeChoiceList : Node
 		GD.Print("theme choosen : "+instanceGM.getThemeChosen());
 		//string [] test = instanceGM.getQuestion();
 		instanceGM.resetVariables();
-		Node simultaneousScene = ResourceLoader.Load<PackedScene>("res://scene/quizz.tscn").Instantiate();
-		GetTree().Root.AddChild(simultaneousScene);
+		//Node simultaneousScene = ResourceLoader.Load<PackedScene>("res://scene/quizz.tscn").Instantiate();
+		//GetTree().Root.AddChild(simultaneousScene);
+		GetTree().ChangeSceneToFile("res://scene/quizz.tscn");
    }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -63,8 +64,9 @@ public partial class initThemeChoiceList : Node
 
 	private void _on_btn_pressed_retour()
 	{
-		Node simultaneousScene = ResourceLoader.Load<PackedScene>("res://scene/menu_principal.tscn").Instantiate();
-		GetTree().Root.AddChild(simultaneousScene);
+		//Node simultaneousScene = ResourceLoader.Load<PackedScene>("res://scene/menu_principal.tscn").Instantiate();
+		//GetTree().Root.AddChild(simultaneousScene);
+		GetTree().ChangeSceneToFile("res://scene/menu_principal.tscn");
 	}
 	
 

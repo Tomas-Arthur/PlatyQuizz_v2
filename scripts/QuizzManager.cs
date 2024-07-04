@@ -62,8 +62,9 @@ public partial class QuizzManager : Node
 		questionActuel = instanceGM.getQuestion();
 		if(questionActuel == null || instanceGM.getNbQuestion() > nbQuestionMax )
 		{
-			Node simultaneousScene = ResourceLoader.Load<PackedScene>("res://scene/endGame.tscn").Instantiate();
-			GetTree().Root.AddChild(simultaneousScene);
+			//Node simultaneousScene = ResourceLoader.Load<PackedScene>("res://scene/endGame.tscn").Instantiate();
+			///GetTree().Root.AddChild(simultaneousScene);
+			GetTree().ChangeSceneToFile("res://scene/endGame.tscn");
 			return;
 		}
 		scoreActuel.Text = "Score : "+instanceGM.getScore()+" / "+nbQuestionMax;
@@ -207,24 +208,27 @@ private void OnTextChanged()
 	private void _on_button_pop_up_pressed()
 	{
 		popupPanel.Hide();
-		Node simultaneousScene = ResourceLoader.Load<PackedScene>("res://scene/quizz.tscn").Instantiate();
-		GetTree().Root.AddChild(simultaneousScene);
+		//Node simultaneousScene = ResourceLoader.Load<PackedScene>("res://scene/quizz.tscn").Instantiate();
+		//GetTree().Root.AddChild(simultaneousScene);
+		GetTree().ChangeSceneToFile("res://scene/quizz.tscn");
 	}
 
 	private void _on_timer_timeout()
 	{
 		timer.Stop();
 		popupPanel.Hide();
-		Node simultaneousScene = ResourceLoader.Load<PackedScene>("res://scene/quizz.tscn").Instantiate();
-		GetTree().Root.AddChild(simultaneousScene);
+		//Node simultaneousScene = ResourceLoader.Load<PackedScene>("res://scene/quizz.tscn").Instantiate();
+		//GetTree().Root.AddChild(simultaneousScene);
+		GetTree().ChangeSceneToFile("res://scene/quizz.tscn");
 	}
 
 
 	private void _on_btn_pressed_retour()
 	{
 		audioStreamPlayer.Stop();
-		Node simultaneousScene = ResourceLoader.Load<PackedScene>("res://scene/menu_principal.tscn").Instantiate();
-		GetTree().Root.AddChild(simultaneousScene);
+		//Node simultaneousScene = ResourceLoader.Load<PackedScene>("res://scene/menu_principal.tscn").Instantiate();
+		//GetTree().Root.AddChild(simultaneousScene);
+		GetTree().ChangeSceneToFile("res://scene/menu_principal.tscn");
 	}
 
 

@@ -169,8 +169,9 @@ public partial class settings : Node
 		instanceGM.setNbQuestionMax(nbQuestionMax.Text.ToInt());
 		instanceGM.saveVolumeAndNbQuestion( audioStreamPlayer.VolumeDb,nbQuestionMax.Text);
 		audioStreamPlayer.Stop();
-		Node simultaneousScene = ResourceLoader.Load<PackedScene>("res://scene/menu_principal.tscn").Instantiate();
-		GetTree().Root.AddChild(simultaneousScene);
+		//Node simultaneousScene = ResourceLoader.Load<PackedScene>("res://scene/menu_principal.tscn").Instantiate();
+		//GetTree().Root.AddChild(simultaneousScene);
+		GetTree().ChangeSceneToFile("res://scene/menu_principal.tscn");
 	}
 
 	private void on_pressed_add_theme()

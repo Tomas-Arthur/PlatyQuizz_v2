@@ -30,7 +30,8 @@ public partial class endGame : Node
 
 	private void _on_buttonretour_pressed()
 	{
-		Node simultaneousScene = ResourceLoader.Load<PackedScene>("res://scene/themeChoice.tscn").Instantiate();
-		GetTree().Root.AddChild(simultaneousScene);
+		//Node simultaneousScene = ResourceLoader.Load<PackedScene>("res://scene/themeChoice.tscn").Instantiate();
+		//GetTree().Root.AddChild(simultaneousScene);
+		GetTree().ChangeSceneToFile("res://scene/themeChoice.tscn");
 	}
 }
