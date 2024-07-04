@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bqo3tjtxbw2q7"
+path="res://.godot/imported/Vicke Blanka - Black Catcher (Anime music video, TV anime「Black Clover」OP10 Theme).mp3-9abfa0b02f69b8e63ac3057883a74c0d.mp3str"
+
+[deps]
+
+source_file="res://Release Windows/ressources/audio/anime/Vicke Blanka - Black Catcher (Anime music video, TV anime「Black Clover」OP10 Theme).mp3"
+dest_files=["res://.godot/imported/Vicke Blanka - Black Catcher (Anime music video, TV anime「Black Clover」OP10 Theme).mp3-9abfa0b02f69b8e63ac3057883a74c0d.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

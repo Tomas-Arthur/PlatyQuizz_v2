@@ -4,9 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://5wg8gpdrrkd" path="res://ressources/fond.png" id="1_xrgn8"]
 [ext_resource type="AudioStream" uid="uid://b5vn17fniqat7" path="res://ressources/One Piece - Binks Sake (Japanese Version).mp3" id="3_li72u"]
 
-[node name="Settings" type="Node2D" node_paths=PackedStringArray("popupPanel", "popupLabel", "timer", "fileDialogRessources", "reponse", "ressource", "fileDialogCible", "themeText", "suggestionItemList", "audioStreamPlayer", "volumeBar")]
+[node name="Settings" type="Node2D" node_paths=PackedStringArray("popupPanel", "addButton", "popupLabel", "timer", "fileDialogRessources", "reponse", "ressource", "fileDialogCible", "themeText", "suggestionItemList", "audioStreamPlayer", "volumeBar")]
 script = ExtResource("1_pc64y")
 popupPanel = NodePath("PopupPanel")
+addButton = NodePath("AddButton")
 popupLabel = NodePath("PopupPanel/labelPopUp")
 timer = NodePath("Timer")
 fileDialogRessources = NodePath("FileDRessouces")

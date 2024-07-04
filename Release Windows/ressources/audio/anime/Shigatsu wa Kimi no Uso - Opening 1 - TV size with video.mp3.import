@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cpood8x2ai5q8"
+path="res://.godot/imported/Shigatsu wa Kimi no Uso - Opening 1 - TV size with video.mp3-cb9daccff364b1a3117a042cf1845629.mp3str"
+
+[deps]
+
+source_file="res://Release Windows/ressources/audio/anime/Shigatsu wa Kimi no Uso - Opening 1 - TV size with video.mp3"
+dest_files=["res://.godot/imported/Shigatsu wa Kimi no Uso - Opening 1 - TV size with video.mp3-cb9daccff364b1a3117a042cf1845629.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

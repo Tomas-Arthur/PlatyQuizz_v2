@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b5vn17fniqat7"
+path="res://.godot/imported/One Piece - Binks Sake (Japanese Version).mp3-cb174b6ece07cd869717f60c38f3e546.mp3str"
+
+[deps]
+
+source_file="res://Release Windows/ressources/One Piece - Binks Sake (Japanese Version).mp3"
+dest_files=["res://.godot/imported/One Piece - Binks Sake (Japanese Version).mp3-cb174b6ece07cd869717f60c38f3e546.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

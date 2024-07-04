@@ -11,6 +11,9 @@ public partial class settings : Node
 	public PopupPanel popupPanel; 
 
 	[Export]
+	public Button addButton;
+
+	[Export]
 	public Label popupLabel;
 
 	[Export]
@@ -54,7 +57,14 @@ public partial class settings : Node
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		
+		if( isInfoGiven() )
+		{
+			addButton.Disabled = false;
+		}
+		else
+		{
+			addButton.Disabled = true;
+		}
 	}
 
 	private void _on_test_otest_button_pressed()
@@ -227,4 +237,13 @@ public partial class settings : Node
 		popupPanel.Hide();
 	}
 	
+	public bool isInfoGiven()
+	{
+		if(reponse.Text != "" & ressource.Text != "" & themeText.Text != "")
+		{
+			return true;
+		}
+		return false;
+	}
+
 }

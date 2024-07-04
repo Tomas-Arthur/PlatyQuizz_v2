@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://s0twf2qjb4s0"
+path="res://.godot/imported/Eyeshield 21 - Breakthrough TV Size.mp3-fc74d56319b75fa85a96dfcb9f42be40.mp3str"
+
+[deps]
+
+source_file="res://Release Windows/ressources/audio/anime/Eyeshield 21 - Breakthrough TV Size.mp3"
+dest_files=["res://.godot/imported/Eyeshield 21 - Breakthrough TV Size.mp3-fc74d56319b75fa85a96dfcb9f42be40.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
